@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-class Main extends React.Component {
+export class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {X: 10, Y: 20, Z: 30};
@@ -26,6 +25,3 @@ class Main extends React.Component {
         );
     }
 }
-
-
-ReactDOM.render(<Main/>, document.getElementById("app"))
