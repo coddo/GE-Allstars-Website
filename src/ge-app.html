@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="ge-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        --app-primary-color: #0088CC;
+        --app-secondary-color: white;
+      }
+
+      app-header {
+        background-color: var(--app-primary-color);
+        color: white;
+      }
+      
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}">
+    </app-route>
+
+    <app-header condenses reveals effects="waterfall">
+        <app-toolbar>
+            <paper-icon-button src="../images/ge-logo.png"></paper-icon-button>
+            <div title>GE Allstars</div>
+        </app-toolbar>
+    </app-header>
+  </template>
+  
+  <script>
+    Polymer({
+      is: 'ge-app',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        },
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)'
+      ],
+
+      _routePageChanged: function(page) {
+        this.page = page || 'landing-page';
+      },
+
+      _pageChanged: function(page) {
+        // load page import on demand.
+        this.importHref(
+          this.resolveUrl('ge-' + page + '.html'), null, null, true);
+      }
+    });
+  </script>
+
+</dom-module>
