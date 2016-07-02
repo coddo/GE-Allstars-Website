@@ -55,7 +55,7 @@
                 padding-left: 10px;
                 margin-left: -20px;
                 margin-top: 2px;
-                width: 180px;
+                width: 140px;
                 left: 60px;
                 font-size: 25px;
             }
@@ -90,7 +90,9 @@
             </app-toolbar>
         </app-header>
 
-        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
+        <a href="/view">NAVIGATE</a>
+
+        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name">
             <ge-landing-page name="landing-page"></ge-landing-page>
             <ge-view name="view"></ge-view>
         </iron-pages>
