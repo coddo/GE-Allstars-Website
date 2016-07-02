@@ -10,82 +10,95 @@
 
 <dom-module id="ge-app">
     <template>
-    <style>
-      :host {
-        display: block;
-        --app-primary-color: #0088CC;
-        --app-secondary-color: white;
-      }
+        <style>
+            :host {
+                display: block;
+                --app-primary-color: #0088CC;
+                --app-secondary-color: white;
+            }
 
-      app-header {
-        background-color: var(--app-primary-color);
-        color: var(--app-secondary-color);
-      }
-      
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: var(--app-secondary-color);
-      }
-      
-      #nav-home {
-          align-self: center;
-          align-content: center;
-          cursor: pointer;
-          position: absolute;
-          margin-top: 6px;
-          margin-left: 2px;
-      }
-      
-      .nav-home-item {
-          position: absolute;
-          align-self: center;
-          height: 50px;
-      }
-      
-      #nav-home-icon {
-          width: 50px;
-          left: 0px;
-      }
-      
-      #nav-home-text {
-          padding-left: 10px;
-          margin-left: -10px;
-          width: 166px;
-          left: 60px;
-          font-size: 33px;
-      }
-    </style>
+            app-header {
+                background-color: var(--app-primary-color);
+                color: var(--app-secondary-color);
+            }
 
-    <app-location route="{{route}}"></app-location>
-    <app-route
-        route="{{route}}"
-        pattern="/:page"
-        data="{{routeData}}"
-        tail="{{subroute}}">
-    </app-route>
-    
-    <app-drawer>
-        <app-header-layout has-scrolling-region>
-        
-            <app-header condenses reveals effects="waterfall">
-                <app-toolbar>
-                    <div id="nav-home" on-tap="navigateToHomePage">
-                        <img id="nav-home-icon" class="nav-home-item" src="../images/ge-logo.png"/>
-                        <div id="nav-home-text" class="nav-home-item">GE Allstars</div>
-                    </div>
-                </app-toolbar>
-            </app-header>
-        
-        
-            <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
-                  <ge-landing-page name="landing-page"></ge-landing-page>
-            </iron-pages>
-            
-        </app-header-layout>
-    </app-drawer>
-        
-  </template>
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: var(--app-secondary-color);
+            }
+
+            #navbar {
+                height: 50px;
+            }
+
+            #nav-home {
+                align-self: center;
+                align-content: center;
+                cursor: pointer;
+                position: absolute;
+                margin-top: 18px;
+                margin-left: 30px;
+            }
+
+            .nav-home-item {
+                position: absolute;
+                align-self: center;
+                height: 40px;
+            }
+
+            .nav-home-icon {
+                width: 40px;
+                left: 0px;
+            }
+
+            .nav-home-text {
+                padding-left: 10px;
+                margin-left: -20px;
+                margin-top: 2px;
+                width: 180px;
+                left: 60px;
+                font-size: 25px;
+            }
+
+            .no-select {
+                -webkit-touch-callout: none;
+                /* iOS Safari */
+                -webkit-user-select: none;
+                /* Chrome/Safari/Opera */
+                -khtml-user-select: none;
+                /* Konqueror */
+                -moz-user-select: none;
+                /* Firefox */
+                -ms-user-select: none;
+                /* Internet Explorer/Edge */
+                user-select: none;
+                /* Non-prefixed version, currently
+                                  not supported by any browser */
+            }
+        </style>
+
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
+        </app-route>
+
+        <app-header id="navbar" condenses reveals effects="waterfall">
+            <app-toolbar>
+                <div id="nav-home" class="no-select" on-tap="navigateToHomePage">
+                    <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
+                    <div class="nav-home-text nav-home-item">GE Allstars</div>
+                </div>
+            </app-toolbar>
+        </app-header>
+
+        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name">
+            <ge-landing-page name="landing-page"></ge-landing-page>
+            <ge-view name="view"></ge-view>
+        </iron-pages>
+
+    </template>
 
     <script>
+        var defaultPage = "landing-page";
+
         Polymer({
             is: 'ge-app',
 
@@ -102,7 +115,7 @@
             ],
 
             _routePageChanged: function(page) {
-                this.page = page || 'landing-page';
+                this.page = page || defaultPage;
             },
 
             // load page import on demand.
@@ -111,7 +124,8 @@
             },
 
             navigateToHomePage: function() {
-                this.page = 'landing-page';
+                // window.location.href = "/";
+                this.page = defaultPage;
             },
         });
     </script>
