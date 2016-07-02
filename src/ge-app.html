@@ -37,6 +37,7 @@
                 position: absolute;
                 margin-top: 18px;
                 margin-left: 30px;
+                color: white;
             }
 
             .nav-home-item {
@@ -80,16 +81,16 @@
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
         </app-route>
 
-        <app-header id="navbar" condenses reveals effects="waterfall">
+        <app-header id="navbar" role="navigation" condenses reveals effects="waterfall">
             <app-toolbar>
-                <div id="nav-home" class="no-select" on-tap="navigateToHomePage">
+                <a href="/" id="nav-home" class="no-select">
                     <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
                     <div class="nav-home-text nav-home-item">GE Allstars</div>
-                </div>
+                </a>
             </app-toolbar>
         </app-header>
 
-        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name">
+        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
             <ge-landing-page name="landing-page"></ge-landing-page>
             <ge-view name="view"></ge-view>
         </iron-pages>
@@ -121,11 +122,6 @@
             // load page import on demand.
             _pageChanged: function(page) {
                 this.importHref(this.resolveUrl('ge-' + page + '.html'), null, null, true);
-            },
-
-            navigateToHomePage: function() {
-                // window.location.href = "/";
-                this.page = defaultPage;
             },
         });
     </script>
