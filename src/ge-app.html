@@ -86,16 +86,15 @@
             </app-toolbar>
         </app-header>
 
-        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name">
+        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="not-found">
             <ge-landing-page name="landing-page"></ge-landing-page>
             <ge-view name="view"></ge-view>
+            <ge-not-found name="not-found"></ge-not-found>
         </iron-pages>
 
     </template>
 
     <script>
-        var defaultPage = "landing-page";
-
         Polymer({
             is: 'ge-app',
 
@@ -112,12 +111,14 @@
             ],
 
             _routePageChanged: function(page) {
-                this.page = page || defaultPage;
+                this.page = page || "landing-page";
             },
 
             // load page import on demand.
             _pageChanged: function(page) {
-                this.importHref(this.resolveUrl('ge-' + page + '.html'), null, null, true);
+                this.importHref(this.resolveUrl('ge-' + page + '.html'), null, function(e) {
+                    this.page = "not-found";
+                }, true);
             },
         });
     </script>
