@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="ge-app">
+    <template>
+        <style>
+            :host {
+                display: block;
+                --app-primary-color: #0088CC;
+                --app-secondary-color: white;
+            }
+
+            app-header {
+                background-color: var(--app-primary-color);
+                color: var(--app-secondary-color);
+            }
+
+            #navbar {
+                height: 50px;
+            }
+
+            #nav-home {
+                align-self: center;
+                align-content: center;
+                cursor: pointer;
+                position: absolute;
+                margin-top: 5px;
+                margin-left: 30px;
+                color: white;
+            }
+
+            .nav-home-item {
+                position: absolute;
+                align-self: center;
+                height: 40px;
+            }
+
+            .nav-home-icon {
+                width: 40px;
+                left: 0px;
+            }
+
+            .nav-home-text {
+                padding-left: 10px;
+                margin-left: -20px;
+                margin-top: 2px;
+                width: 140px;
+                left: 60px;
+                font-size: 25px;
+            }
+
+            .no-select {
+                -webkit-touch-callout: none;
+                /* iOS Safari */
+                -webkit-user-select: none;
+                /* Chrome/Safari/Opera */
+                -khtml-user-select: none;
+                /* Konqueror */
+                -moz-user-select: none;
+                /* Firefox */
+                -ms-user-select: none;
+                /* Internet Explorer/Edge */
+                user-select: none;
+                /* Non-prefixed version, currently
+                                  not supported by any browser */
+            }
+        </style>
+
+        <app-location route="{{route}}"></app-location>
+        <app-route use-hash-as-path route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
+        </app-route>
+
+        <app-header id="navbar" role="navigation" fixed effects="waterfall">
+            <app-toolbar>
+                <a href="/" id="nav-home" class="no-select">
+                    <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
+                    <div class="nav-home-text nav-home-item">GE Allstars</div>
+                </a>
+            </app-toolbar>
+        </app-header>
+
+        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name">
+            <ge-landing-page name="landing-page"></ge-landing-page>
+            <ge-view name="view"></ge-view>
+        </iron-pages>
+
+    </template>
+
+    <script>
+        var defaultPage = "landing-page";
+
+        Polymer({
+            is: 'ge-app',
+
+            properties: {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                },
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)'
+            ],
+
+            _routePageChanged: function(page) {
+                this.page = page || defaultPage;
+            },
+
+            // load page import on demand.
+            _pageChanged: function(page) {
+                this.importHref(this.resolveUrl('ge-' + page + '.html'), null, null, true);
+            },
+        });
+    </script>
+
+</dom-module>
