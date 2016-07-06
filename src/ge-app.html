@@ -7,7 +7,6 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
-
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <dom-module id="ge-app">
@@ -113,10 +112,10 @@
             }
 
             #footer-title {
-              display: inline-block;
-              position: relative;
-              top: calc(50% - 11px);
-              height: 22px;
+                display: inline-block;
+                position: relative;
+                top: calc(50% - 11px);
+                height: 22px;
             }
         </style>
 
@@ -124,34 +123,44 @@
         <app-route use-hash-as-path route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
         </app-route>
 
-        <body class="fullbleed layout vertical">
-            <paper-scroll-header-panel condenses class="flex">
-                <paper-toolbar id="navbar" class="tall" role="toolbar">
-                    <a href="/" id="nav-home" class="bottom no-select">
-                        <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
-                        <div class="nav-home-text nav-home-item">GE Allstars</div>
-                    </a>
-                </paper-toolbar>
+        <iron-pages attr-for-selected="name" selected="[[page]]" fallback-selection="main">
 
-                <div class="main-content">
-                    <div class="body-content">
-                        <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="not-found">
-                            <ge-landing-page name="landing-page"></ge-landing-page>
-                            <ge-not-found name="not-found"></ge-not-found>
-                        </iron-pages>
-                        <!-- <ge-landing-page name="landing-page"></ge-landing-page>
+            <div name="not-found">
+                <ge-not-found></ge-not-found>
+            </div>
+
+            <div name="main">
+
+                <body class="fullbleed layout vertical">
+                    <paper-scroll-header-panel condenses class="flex">
+                        <paper-toolbar id="navbar" class="tall" role="toolbar">
+                            <a href="/" id="nav-home" class="bottom no-select">
+                                <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
+                                <div class="nav-home-text nav-home-item">GE Allstars</div>
+                            </a>
+                        </paper-toolbar>
+
+                        <div class="main-content">
+                            <div class="body-content">
+                                <iron-pages id="router" role="main" selected="[[page]]" attr-for-selected="name">
+                                    <ge-landing-page name="landing-page"></ge-landing-page>
+                                </iron-pages>
+                                <!-- <ge-landing-page name="landing-page"></ge-landing-page>
                         <ge-landing-page name="landing-page"></ge-landing-page>
                         <ge-landing-page name="landing-page"></ge-landing-page>
                         <ge-landing-page name="landing-page"></ge-landing-page>
                         <ge-landing-page name="landing-page"></ge-landing-page> -->
-                    </div>
+                            </div>
 
-                    <footer>
-                        <span id="footer-title">@Copyright GE Allstars 2016</span>
-                    </footer>
-                </div>
-            </paper-scroll-header-panel>
-        </body>
+                            <footer>
+                                <span id="footer-title">@Copyright GE Allstars 2016</span>
+                            </footer>
+                        </div>
+                    </paper-scroll-header-panel>
+                </body>
+            </div>
+
+        </iron-pages>
 
     </template>
 
