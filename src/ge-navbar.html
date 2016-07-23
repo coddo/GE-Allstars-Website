@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+
+<dom-module id="ge-navbar">
+    <template>
+        <style>
+            paper-toolbar.tall {
+                background-color: transparent;
+            }
+
+            #navbar {
+                background-color: var(--app-primary-color);
+                color: var(--app-secondary-color);
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 60px;
+                z-index: 1;
+            }
+
+            #nav-home {
+                align-self: center;
+                align-content: center;
+                cursor: pointer;
+                position: absolute;
+                margin-top: 13px;
+                margin-left: 30px;
+                color: white;
+            }
+
+            .nav-home-item {
+                position: absolute;
+                align-self: center;
+                height: 40px;
+            }
+
+            .nav-home-icon {
+                width: 40px;
+                left: 0px;
+            }
+
+            .nav-home-text {
+                padding-left: 10px;
+                margin-left: -20px;
+                margin-top: 2px;
+                width: 140px;
+                left: 60px;
+                font-size: 25px;
+                -webkit-transform-origin: left center;
+                transform-origin: left center;
+            }
+        </style>
+
+        <paper-toolbar class="tall" id="navbar" role="toolbar">
+            <a href="/" id="nav-home" class="bottom no-select">
+                <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
+                <div class="nav-home-text nav-home-item">GE Allstars</div>
+            </a>
+        </paper-toolbar>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'ge-navbar'
+        });
+    </script>
+</dom-module>
