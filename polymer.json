@@ -2,7 +2,6 @@
   "entrypoint": "index.html",
   "shell": "src/ge-app.html",
   "fragments": [
-    "src/ge-landing-page.html",
-    "src/ge-not-found.html"
+    "src/ge-landing-page.html"
   ]
 }
