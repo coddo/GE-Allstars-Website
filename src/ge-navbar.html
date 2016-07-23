@@ -21,13 +21,14 @@
             }
 
             #nav-home {
-                align-self: center;
-                align-content: center;
                 cursor: pointer;
-                position: absolute;
-                margin-top: 13px;
                 margin-left: 30px;
                 color: white;
+            }
+
+            .nav-item {
+                position: relative;
+                margin-top: -37px;
             }
 
             .nav-home-item {
@@ -54,7 +55,7 @@
         </style>
 
         <paper-toolbar class="tall" id="navbar" role="toolbar">
-            <a href="/" id="nav-home" class="bottom no-select">
+            <a href="/" class="bottom no-select nav-item" id="nav-home">
                 <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
                 <div class="nav-home-text nav-home-item">GE Allstars</div>
             </a>
