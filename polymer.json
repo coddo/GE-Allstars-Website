@@ -3,6 +3,6 @@
   "shell": "src/ge-app.html",
   "fragments": [
     "src/ge-landing-page.html",
-    "src/ge-people.html"
+    "src/ge-scholars.html"
   ]
 }
