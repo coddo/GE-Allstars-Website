@@ -4,12 +4,16 @@
   "icons": [{
         "src": "images/ge-logo.png",
         "type": "image/png",
-        "sizes": "64x64"  
+        "sizes": "64x64"
     },
     {
         "src": "images/ge-logo-blue.png",
         "type": "image/png",
-        "sizes": "64x64"  
+        "sizes": "64x64"
+    },
+    {
+        "src": "images/404-unicorn.jpg",
+        "type": "image/jpg"
     }],
   "start_url": "/",
   "display": "standalone",

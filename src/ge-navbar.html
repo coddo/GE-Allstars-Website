@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="ge-navbar">
+    <template>
+        <style>
+            #navbar {
+                background-color: var(--app-primary-color);
+                color: var(--app-secondary-color);
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1;
+            }
+
+            #nav-home {
+                position: relative;
+                cursor: pointer;
+                margin-left: 30px;
+                color: white;
+            }
+
+            .nav-item {
+                position: absolute;
+                height: 40px;
+                display: inline-block;
+                top: 0;
+            }
+
+            .nav-home-item {
+                position: absolute;
+                align-self: center;
+            }
+
+            .nav-home-icon {
+                width: 40px;
+                left: 0px;
+            }
+
+            .nav-home-text {
+                padding-left: 10px;
+                margin-top: 2px;
+                width: 140px;
+                left: 40px;
+                font-size: 25px;
+                -webkit-transform-origin: left center;
+                transform-origin: left center;
+            }
+
+            .nav-pull-right {
+                height: 60px;
+                width: 60px;
+                right: 30px;
+            }
+        </style>
+
+        <paper-toolbar id="navbar" role="toolbar">
+            <a href="/" class="no-select nav-item" id="nav-home">
+                <img class="nav-home-icon nav-home-item" src="../images/ge-logo.png" />
+                <div class="nav-home-text nav-home-item">GE Allstars</div>
+            </a>
+            <paper-icon-button class="nav-item nav-pull-right" src="../images/account.png"></paper-icon-button>
+        </paper-toolbar>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'ge-navbar',
+
+            properties: {
+                page: String
+            },
+        });
+    </script>
+</dom-module>
