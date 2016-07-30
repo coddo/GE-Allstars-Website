@@ -77,7 +77,7 @@
 
         <paper-card class="card" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <div class="card-content" id="card-header">
-                <iron-image sizing="cover" class="header-item" id="profile-picture" src="[[scholar.profilePicture]]"></iron-image>
+                <iron-image class="header-item" id="profile-picture" src="[[scholar.profilePicture]]" preload="true" fade="true" sizing="cover"></iron-image>
                 <div class="header-item" id="top-info">
                     <span class="top-info-child" id="full-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</span>
                     <span class="top-info-child">Age: <label>[[scholar.age]]</label></span>
