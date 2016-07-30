@@ -13,6 +13,7 @@
                 min-height: 300px;
                 padding: 5px 5px 5px 5px;
                 margin: 5px 2px 2px 2px;
+                cursor: pointer;
             }
 
             .card iron-image {
@@ -62,7 +63,8 @@
                 text-align: left;
             }
 
-            .top-info-child> label {
+            .top-info-child> label,
+            .top-info-child> a {
                 color: #607D8B;
             }
 
@@ -79,7 +81,7 @@
                 <div class="header-item" id="top-info">
                     <span class="top-info-child" id="full-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</span>
                     <span class="top-info-child">Age: <label>[[scholar.age]]</label></span>
-                    <span class="top-info-child">Email: <label>[[scholar.email]]</label></span>
+                    <span class="top-info-child">Email: <a href="mailto:[[scholar.email]]">[[scholar.email]]</a></span>
                     <span class="top-info-child">Scholar since: <label>[[scholar.scholarSince]]</label></span>
                 </div>
             </div>
