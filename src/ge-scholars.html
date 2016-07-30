@@ -16,7 +16,7 @@
         </style>
 
         <div id="cards">
-            <template class="card" is="dom-repeat" items="[[scholars]]">
+            <template class="card-item" is="dom-repeat" items="[[scholars]]">
                 <ge-scholar-card scholar="[[item]]"></ge-scholar-card>
             </template>
         </div>
@@ -25,13 +25,6 @@
     <script>
         Polymer({
             is: "ge-scholars",
-
-            properties: {
-                scholars: {
-                    type: Array,
-                    value: [],
-                },
-            },
 
             ready: function() {
                 if (!validatorModule.isNullOrEmpty(this.scholars)) {
