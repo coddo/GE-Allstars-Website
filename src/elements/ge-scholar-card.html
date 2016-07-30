@@ -75,7 +75,7 @@
             }
         </style>
 
-        <paper-card class="card" on-mouseover="onCardHover" on-mouseout="onCardOut" elevation="[[defaultElevation]]">
+        <paper-card class="card" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <div class="card-content" id="card-header">
                 <iron-image sizing="cover" class="header-item" id="profile-picture" src="[[scholar.profilePicture]]"></iron-image>
                 <div class="header-item" id="top-info">
@@ -110,21 +110,27 @@
 
                 this.defaultElevation = 3;
                 this.hoverElevation = 5;
+
+                this.set('currentElevation', this.defaultElevation);
             },
 
-            onCardHover: function(e) {
-                e.target.elevation = this.hoverElevation;
+            _onCardEnter: function(e) {
+                // e.target.elevation = this.hoverElevation;
+                this.set('currentElevation', this.hoverElevation);
+
             },
 
-            onCardOut: function(e) {
-                e.target.elevation = this.defaultElevation;
+            _onCardLeave: function(e) {
+                // e.target.elevation = this.defaultElevation;
+                this.set('currentElevation', this.defaultElevation);
             },
 
             computeAge: function() {
                 var birthDate = moment(this.scholar.birthday, "DD MMMM YYYY");
                 var now = moment();
 
-                this.scholar.age = now.diff(birthDate, 'years');
+                // this.scholar.age = now.diff(birthDate, 'years');
+                this.set('scholar.age', now.diff(birthDate, 'years'));
             },
         });
     </script>
