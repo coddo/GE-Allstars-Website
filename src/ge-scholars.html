@@ -19,12 +19,17 @@
             <template class="card-item" is="dom-repeat" items="[[scholars]]">
                 <ge-scholar-card scholar="[[item]]"></ge-scholar-card>
             </template>
+            <!-- <ge-scholar-card scholars='[[scholars]]'></ge-scholar-card> -->
         </div>
     </template>
 
     <script>
         Polymer({
             is: "ge-scholars",
+
+            hello: function(item) {
+                print(item);
+            },
 
             ready: function() {
                 if (!validatorModule.isNullOrEmpty(this.scholars)) {
@@ -89,19 +94,17 @@
                     googlePlus: "Google+ link here",
                 };
 
-                this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
-                // this.scholars.push(scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
             }
         });
     </script>

@@ -6,7 +6,7 @@
 
 <dom-module id="ge-scholar-card">
     <template>
-        <style>
+        <style is="custom-style">
             .card {
                 display: inline-block;
                 min-width: 500px;
@@ -35,7 +35,7 @@
             #profile-picture {
                 width: 64px;
                 height: 64px;
-                background-color: red;
+                /*background-color: red;*/
             }
 
             #top-info {
@@ -54,7 +54,7 @@
 
         <paper-card class="card" on-mouseover="onCardHover" on-mouseout="onCardOut" elevation="[[defaultElevation]]">
             <div id="card-header">
-                <iron-image class="header-item" id="profile-picture" src="[[scholar.profilePicture]]"></iron-image>
+                <iron-image sizing="cover" class="header-item" id="profile-picture" src="[[scholar.profilePicture]]"></iron-image>
                 <div class="header-item" id="top-info">
                 </div>
             </div>
@@ -66,8 +66,10 @@
             is: "ge-scholar-card",
 
             properties: {
-                scholar: Object,
-                notify: true,
+                scholar: {
+                    type: Object,
+                    notify: true,
+                },
             },
 
             ready: function() {
@@ -83,9 +85,5 @@
                 e.target.elevation = this.defaultElevation;
             },
         });
-
-        function initializeScholar() {
-
-        }
     </script>
 </dom-module>
