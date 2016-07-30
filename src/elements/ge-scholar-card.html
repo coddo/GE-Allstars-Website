@@ -49,10 +49,6 @@
             ready: function() {
                 this.defaultElevation = 3;
                 this.hoverElevation = 5;
-
-                if (validatorModule.isNull(this.scholar)) {
-                    initializeScholar();
-                }
             },
 
             onCardHover: function(e) {
@@ -65,61 +61,7 @@
         });
 
         function initializeScholar() {
-            this.scholar = {
-                profilePicture: "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-387179.jpg",
-                email: "scholar@geallstars.com",
-                lastName: "GE Scholar",
-                middleName: "The",
-                firstName: "Coddo",
-                birthday: "12 December 1993",
-                geScholarSince: "2015",
-                phone: [
-                    "05616018919681",
-                    "08978916156165"
-                ],
-                school: [{
-                    name: "General Highschool of Justice",
-                    type: "Highschool",
-                    major: "Informatics and mathematics",
-                    location: "Deva, Romania",
-                    startDate: "September 2009",
-                    endDate: "October 2013",
-                }, {
-                    name: "GE Scholars University",
-                    type: "Undergrad studies",
-                    major: "Computer Science",
-                    location: "Timisoara, Romania",
-                    startDate: "September 2013",
-                }],
-                work: [{
-                    name: "My first job",
-                    position: "Software Engineer",
-                    industry: "IT",
-                    location: "Deva, Romania",
-                    startDate: "September 2009",
-                    endDate: "October 2013",
-                }, {
-                    name: "My second job",
-                    position: "Full Stack Developer",
-                    industry: "IT",
-                    location: "Deva, Romania",
-                    startDate: "September 2009",
-                    endDate: "October 2013",
-                }],
-                bornIn: "Deva, Romania",
-                livesIn: "Timisoara, Romania",
-                hobbies: [
-                    "Photography",
-                    "Computer science",
-                    "Skying",
-                    "Travelling",
-                ],
-                bio: "Lorem ipsum dolor sit amet",
-                facebook: "Facebook link here",
-                linkedIn: "LinkedIn link here",
-                twitter: "Twitter link here",
-                googlePlus: "Google+ link here",
-            };
+
         }
     </script>
 </dom-module>
