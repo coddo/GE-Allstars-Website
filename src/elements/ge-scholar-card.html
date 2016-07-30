@@ -2,37 +2,29 @@
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../../bower_components/paper-material/paper-material.html">
 
 <dom-module id="ge-scholar-card">
     <template>
         <style>
             .card {
-                width: 100%;
-                height: 100%;
-                padding: 10px 10px 10px 10px;
-            }
-
-            #scholar-card {
-                background: #fff;
-                min-width: 600px;
-                min-height: 400px;
-                position: relative;
-            }
-
-            paper-material {
                 display: inline-block;
-                margin: 30px 30px 30px 30px;
-                width: 600px;
-                height: 400px;
+                margin: 5px 5px 5px 5px;
+                min-width: 500px;
+                min-height: 300px;
+            }
+
+            .card-inner-container {
+                width: 100%;
+                height: 50%;
+                padding: 10px 10px 10px 10px;
+                background: #fff;
+                position: relative;
             }
         </style>
 
-        <paper-material id="container" on-mouseover="onCardHover" on-mouseout="onCardOut" elevation="[[defaultElevation]]">
-            <paper-card class="card" id="scholar-card">
-                ASFSAFASFSA
-            </paper-card>
-        </paper-material>
+        <paper-card class="card" on-mouseover="onCardHover" on-mouseout="onCardOut" elevation="[[defaultElevation]]">
+
+        </paper-card>
     </template>
 
     <script>
