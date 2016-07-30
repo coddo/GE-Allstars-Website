@@ -36,7 +36,7 @@
             },
 
             ready: function() {
-                if (!validatorModule.isNull(this.scholars) && this.scholars.length > 0) {
+                if (!validatorModule.isNullOrEmpty(this.scholars)) {
                     return;
                 }
 

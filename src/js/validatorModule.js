@@ -1,14 +1,19 @@
 var validatorModule = function() {
     function isNull(data) {
-        return typeof data === 'undefined' || data === "undefined";
+        return typeof data === 'undefined' || data === "undefined" || typeof data === "null" || data === null || data === "null";
     }
 
     function isNullOrEmpty(data) {
-        return typeof data === String && (isNull(data) || data === "");
+        if (isNull(data)) {
+            return true;
+        }
+
+        return (typeof data === "string" && data === "") ||
+            ((typeof data === "array" || typeof data == "object") && !isNull(data.length) && data.length === 0);
     }
 
     function isNullOrWhitespace(data) {
-        return typeof data === String && isNullOrEmpty(data.trim());
+        return typeof data === "string" && isNullOrEmpty(data.trim());
     }
 
     return {
