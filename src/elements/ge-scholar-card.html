@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
 <dom-module id="ge-scholar-card">
     <template>
@@ -32,7 +33,7 @@
 
             #top-info {
                 max-width: calc(100% - 80px);
-                left:5px;
+                left: 5px;
                 /*background-color: blue;*/
             }
 
@@ -64,6 +65,15 @@
                 margin-bottom: -7px;
                 margin-left: -4px;
             }
+
+            .social-links a::after {
+                content: "";
+            }
+
+            .social-button {
+                height: 40px;
+                width: 40px;
+            }
         </style>
 
         <paper-card class="card" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
@@ -75,12 +85,23 @@
                     <p>Email: <a href="mailto:[[scholar.email]]">[[scholar.email]]</a></p>
                     <p>Scholar since: <span>[[scholar.scholarSince]]</span></p>
                 </div>
+                <div class="social-links">
+                    <a target="_blank" href="[[scholar.facebook]]">
+                        <paper-icon-button class="social-button" src="../../images/f-b-logo.png"></paper-icon-button>
+                    </a>
+                    <a target="_blank" href="[[scholar.linkedIn]]">
+                        <paper-icon-button class="social-button" src="../../images/lkdin-logo.png"></paper-icon-button>
+                    </a>
+                    <a target="_blank" href="[[scholar.twitter]]">
+                        <paper-icon-button class="social-button" src="../../images/twt-logo.png"></paper-icon-button>
+                    </a>
+                    <a target="_blank" href="[[scholar.googlePlus]]">
+                        <paper-icon-button class="social-button" src="../../images/g-plus-logo.png"></paper-icon-button>
+                    </a>
+                </div>
             </div>
             <div class="card-actions">
-                <p>AAAAAAAAa</p>
-                <p>AAAAAAAAa</p>
-                <p>AAAAAAAAa</p>
-                <p>AAAAAAAAa</p>
+
             </div>
         </paper-card>
     </template>
