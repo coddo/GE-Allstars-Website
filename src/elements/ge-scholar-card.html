@@ -33,8 +33,8 @@
                 border-radius: 50%;
                 -webkit-border-radius: 50%;
                 vertical-align: middle;
-                background-color: red;
-                top: 2px;
+                top: 3px;
+                background-color: var(--app-primary-color);
             }
 
             #top-info {
@@ -86,9 +86,9 @@
             }
         </style>
 
-        <paper-card class="card" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
+        <paper-card class="card no-select" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <div class="card-content" id="card-header">
-                <iron-image class="header-item" src="[[scholar.profilePicture]]" preload="true" fade="true" sizing="cover"></iron-image>
+                <iron-image class="header-item" src="[[scholar.profilePicture]]" placeholder="../../images/account.png" preload="true" sizing="cover"></iron-image>
                 <div class="header-item" id="top-info">
                     <p id="full-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</p>
                     <p>Age: <span>[[scholar.age]]</span></p>
