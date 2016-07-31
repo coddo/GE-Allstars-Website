@@ -16,7 +16,8 @@
     "app-layout": "PolymerElements/app-layout#^0.10.1",
     "iron-image": "PolymerElements/iron-image#^1.2.3",
     "moment": "^2.14.1",
-    "paper-card": "PolymerElements/paper-card#^1.1.1"
+    "paper-card": "PolymerElements/paper-card#^1.1.1",
+    "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
