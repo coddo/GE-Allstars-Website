@@ -12,11 +12,12 @@
                 align-content: center;
                 align-items: center;
                 text-align: center;
+                padding-top: 50px;
             }
         </style>
 
         <div id="cards">
-            <template class="card-item" is="dom-repeat" items="[[scholars]]">
+            <template is="dom-repeat" items="[[scholars]]">
                 <ge-scholar-card scholar="[[item]]"></ge-scholar-card>
             </template>
             <!-- <ge-scholar-card scholars='[[scholars]]'></ge-scholar-card> -->
@@ -51,7 +52,7 @@
                         "05616018919681",
                         "08978916156165"
                     ],
-                    school: [{
+                    education: [{
                         name: "General Highschool of Justice",
                         type: "Highschool",
                         major: "Informatics and mathematics",
@@ -66,14 +67,14 @@
                         startDate: "September 2013",
                     }],
                     work: [{
-                        name: "My first job",
+                        company: "Facebook",
                         position: "Software Engineer",
                         industry: "IT",
                         location: "Deva, Romania",
                         startDate: "September 2009",
                         endDate: "October 2013",
                     }, {
-                        name: "My second job",
+                        company: "Microsoft",
                         position: "Full Stack Developer",
                         industry: "IT",
                         location: "Deva, Romania",
