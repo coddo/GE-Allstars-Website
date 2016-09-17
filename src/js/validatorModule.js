@@ -10,12 +10,8 @@ var validatorModule = function() {
             return true;
         }
 
-        return (typeof data === "string" && data === "") ||
+        return (typeof data === "string" && data.trim() === "") ||
             ((typeof data === "array" || typeof data == "object") && !isNull(data.length) && data.length === 0);
-    }
-
-    function isNullOrWhitespace(data) {
-        return typeof data === "string" && isNullOrEmpty(data.trim());
     }
 
     function isUrlValid(link) {
@@ -30,7 +26,6 @@ var validatorModule = function() {
     return {
         isNull: isNull,
         isNullOrEmpty: isNullOrEmpty,
-        isNullOrWhitespace: isNullOrWhitespace,
         isUrlValid: isUrlValid
     };
 }();
