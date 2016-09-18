@@ -1,100 +1,68 @@
 <!DOCTYPE html>
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
 
 <dom-module id="ge-scholar-card">
     <template>
         <style is="custom-style">
-            :host {
-                --card-emph-text-color: #607D8B;
-            }
-
             .card {
                 display: inline-block;
-                padding: 5px 5px 5px 5px;
-                margin: 5px 2px 2px 2px;
+                padding: 0;
+                margin: 10px;
                 cursor: pointer;
-                min-height: 85px;
+                width: 400px;
+                height: 350px;
             }
 
-            #card-header {
-                padding: 0 0 0 0;
-                margin-right: 10px;
-                /*background-color: black;*/
-            }
-
-            .card iron-image {
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                -webkit-border-radius: 50%;
-                vertical-align: middle;
-                top: 3px;
-                background-color: var(--app-primary-color);
-            }
-
-            #top-info {
-                max-width: calc(100% - 80px);
-                left: 5px;
-                /*background-color: blue;*/
-            }
-
-            .header-item {
-                display: inline-block;
-                vertical-align: middle;
+            .card-header .profile-picture {
                 position: relative;
-                margin: 0 0 0 0;
-                padding: 0 0 0 0;
+                width: 100%;
+                height: 300px;
+                padding: 0;
+                margin: 0;
             }
 
-            .header-item p {
-                display: block;
-                left: 0;
-                font-size: 12px;
-                text-align: left;
-                margin: 0 0 0 0;
-                padding: 0 0 0 0;
-            }
-
-            .header-item p> span,
-            .header-item p> a {
-                color: var(--card-emph-text-color);
-            }
-
-            #full-name {
+            .card-header .scholar-name {
                 font-size: 25px;
-                color: var(--card-emph-text-color);
-                margin-bottom: -7px;
-                margin-left: -4px;
+                color: var(--app-color-white);
+                position: absolute;
+                top: 230px;
+                left: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-wrap: break-word;
+                text-align: left;
+                width: 95%;
             }
 
-            .social-links a {
+            .card-header .social-links {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .card-header .social-links a {
                 text-decoration: none;
             }
 
-            .social-links paper-tooltip {
-                --paper-tooltip-text-color: #fff;
+            .card-header .social-links paper-tooltip {
+                --paper-tooltip-text-color: var(--app-color-white);
             }
 
-            .social-button {
+            .card-header .social-links .social-button {
                 height: 40px;
                 width: 40px;
             }
         </style>
 
-        <paper-card class="card no-select" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
-            <div class="card-content" id="card-header">
-                <iron-image class="header-item" src="[[scholar.profilePicture]]" placeholder="../../images/account.png" preload="true" sizing="cover"></iron-image>
-                <div class="header-item" id="top-info">
-                    <p id="full-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</p>
-                    <p>Age: <span>[[scholar.age]]</span></p>
-                    <p>Email: <a href="mailto:[[scholar.email]]">[[scholar.email]]</a></p>
-                    <p>Scholar since: <span>[[scholar.scholarSince]]</span></p>
-                </div>
+        <paper-material class="card no-select" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
+            <div class="card-header">
+                <img class="profile-picture" src="[[scholar.profilePicture]]" />
+                <p class="scholar-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</p>
                 <div class="social-links">
                     <template is="dom-if" if="[[_isSocialLinkSet(scholar.facebook)]]">
                         <a target="_blank" href="[[scholar.facebook]]">
@@ -125,7 +93,7 @@
             <div class="card-actions">
 
             </div>
-        </paper-card>
+        </paper-material>
     </template>
 
     <script src="../../bower_components/moment/moment.js"></script>
@@ -150,19 +118,16 @@
             },
 
             _onCardEnter: function(e) {
-                // e.target.elevation = this.hoverElevation;
                 this.set('currentElevation', this.hoverElevation);
 
             },
 
             _onCardLeave: function(e) {
-                // e.target.elevation = this.defaultElevation;
                 this.set('currentElevation', this.defaultElevation);
             },
 
             _isSocialLinkSet(link) {
-                // return validatorModule.isUrlValid(link); //TODO: enable this back
-                return true;
+                return validatorModule.isUrlValid(link);
             },
 
             computeAge: function() {
