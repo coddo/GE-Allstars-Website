@@ -25,7 +25,7 @@
             }
 
             #card-header {
-                height: 300px;
+                height: 70%;
             }
 
             #card-header .profile-picture {
@@ -37,11 +37,12 @@
             }
 
             #card-header .scholar-name {
-                font-size: 25px;
+                font-size: 24px;
+                font-weight: 400;
                 color: var(--app-color-white);
                 position: absolute;
-                top: 230px;
-                left: 10px;
+                top: 220px;
+                left: 20px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -70,21 +71,19 @@
             }
 
             #card-actions {
-                width: 100%;
-                left: 5px;
-                top: 5px;
+                width: 98%;
+                height: 26%;
+                left: 1%;
+                top: 2%;
                 position: relative;
             }
 
             #card-actions .info-items {
-                display: inline-block;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-wrap);
                 height: 30px;
                 overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                word-wrap: break-word;
-                position: relative;
-                vertical-align: middle;
                 margin-bottom: 8px;
             }
         </style>
@@ -123,21 +122,21 @@
             <div class="card-section" id="card-actions">
                 <div class="vertical layout center">
                     <template is="dom-if" if="[[_hasData(scholar.interests)]]">
-                        <div class="info-items">
+                        <div class="info-items no-select">
                             <template is="dom-repeat" items="[[scholar.interests]]">
                                 <ge-info-item background-color="#FFEB3B" text="[[item]]"></ge-info-item>
                             </template>
                         </div>
                     </template>
                     <template is="dom-if" if="[[_hasData(scholar.education)]]">
-                        <div class="info-items">
+                        <div class="info-items no-select">
                             <template is="dom-repeat" items="[[scholar.education]]">
                                 <ge-info-item background-color="#90CAF9" text="[[item.school]]"></ge-info-item>
                             </template>
                         </div>
                     </template>
                     <template is="dom-if" if="[[_hasData(scholar.work)]]">
-                        <div class="info-items">
+                        <div class="info-items no-select">
                             <template is="dom-repeat" items="[[scholar.work]]">
                                 <ge-info-item background-color="#FF9800" text="[[item.company]]"></ge-info-item>
                             </template>

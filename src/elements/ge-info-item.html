@@ -13,7 +13,8 @@
         #content {
             cursor: pointer;
             padding: 2px 5px 2px 5px;
-            margin-right: 4px;
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
 
         #content span {
@@ -22,7 +23,7 @@
         }
     </style>
     <template>
-        <paper-material style="background-color:[[backgroundColor]]" id="content" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
+        <paper-material class= "no-select" id="content" style="background-color:[[backgroundColor]]" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <span class="no-select">[[text]]</span>
         </paper-material>
     </template>
