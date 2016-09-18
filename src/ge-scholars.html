@@ -98,7 +98,7 @@
                 };
 
                 var scholar2 = {
-                    profilePicture: "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-291393.jpg",
+                    profilePicture: "",//"https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-291393.jpg",
                     // profilePicture: "",
                     email: "scholar@geallstars.com",
                     lastName: "Lester Smith",
@@ -170,8 +170,13 @@
                 this.push('scholars', scholar);
 
                 this.scholars.forEach(function(item) {
-                    item.education = item.education.sort(this.descDateComparer);
-                    item.work = item.work.sort(this.descDateComparer);
+                    if (!validatorModule.isNullOrEmpty(item.education)) {
+                        item.education = item.education.sort(this.descDateComparer);
+                    }
+
+                    if (!validatorModule.isNullOrEmpty(item.work)) {
+                        item.work = item.work.sort(this.descDateComparer);
+                    }
                 });
             },
 
@@ -185,7 +190,7 @@
                     }
 
                     return 1;
-                } else if (validatorModule.isNull(secondItem.endDate)){
+                } else if (validatorModule.isNull(secondItem.endDate)) {
                     if (validatorModule.isNull(firstItem.endDate)) {
                         var firstDate = moment(firstItem.startDate, "MMMM YYYY");
                         var secondDate = moment(secondItem.startDate, "MMMM YYYY");

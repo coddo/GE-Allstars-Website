@@ -6,11 +6,13 @@
 <link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="ge-info-item.html">
+<link rel="import" href="ge-img.html">
 
 <dom-module id="ge-scholar-card">
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment">
             .card {
+                background-color: var(--app-color-white);
                 display: inline-block;
                 padding: 0;
                 margin: 10px;
@@ -90,7 +92,7 @@
 
         <paper-material class="card no-select" animated="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <div class="card-section" id="card-header">
-                <img class="profile-picture" src="[[scholar.profilePicture]]" />
+                <ge-img class="profile-picture" src="[[scholar.profilePicture]]" alt-src="../../images/ge-logo.png"></ge-img>
                 <p class="scholar-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</p>
                 <div class="social-links">
                     <template is="dom-if" if="[[_isSocialLinkSet(scholar.facebook)]]">
@@ -181,7 +183,6 @@
             },
 
             _hasData: function(obj) {
-                console.log(obj);
                 return !validatorModule.isNullOrEmpty(obj);
             },
 
