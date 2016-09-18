@@ -4,28 +4,39 @@
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="ge-info-item.html">
 
 <dom-module id="ge-scholar-card">
     <template>
-        <style is="custom-style">
+        <style is="custom-style" include="iron-flex iron-flex-alignment">
             .card {
                 display: inline-block;
                 padding: 0;
                 margin: 10px;
                 cursor: pointer;
                 width: 400px;
-                height: 350px;
+                height: 416px;
             }
 
-            .card-header .profile-picture {
+            .card-section {
+                float: left;
+                width: 100%;
+            }
+
+            #card-header {
+                height: 300px;
+            }
+
+            #card-header .profile-picture {
                 position: relative;
                 width: 100%;
-                height: 300px;
+                height: 100%;
                 padding: 0;
                 margin: 0;
             }
 
-            .card-header .scholar-name {
+            #card-header .scholar-name {
                 font-size: 25px;
                 color: var(--app-color-white);
                 position: absolute;
@@ -39,28 +50,47 @@
                 width: 95%;
             }
 
-            .card-header .social-links {
+            #card-header .social-links {
                 position: absolute;
                 left: 0;
                 top: 0;
             }
 
-            .card-header .social-links a {
+            #card-header .social-links a {
                 text-decoration: none;
             }
 
-            .card-header .social-links paper-tooltip {
+            #card-header .social-links paper-tooltip {
                 --paper-tooltip-text-color: var(--app-color-white);
             }
 
-            .card-header .social-links .social-button {
+            #card-header .social-links .social-button {
                 height: 40px;
                 width: 40px;
             }
+
+            #card-actions {
+                width: 100%;
+                left: 5px;
+                top: 5px;
+                position: relative;
+            }
+
+            #card-actions .info-items {
+                display: inline-block;
+                height: 30px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-wrap: break-word;
+                position: relative;
+                vertical-align: middle;
+                margin-bottom: 8px;
+            }
         </style>
 
-        <paper-material class="card no-select" animated="true" animate-shadow="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
-            <div class="card-header">
+        <paper-material class="card no-select" animated="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
+            <div class="card-section" id="card-header">
                 <img class="profile-picture" src="[[scholar.profilePicture]]" />
                 <p class="scholar-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</p>
                 <div class="social-links">
@@ -90,13 +120,34 @@
                     </template>
                 </div>
             </div>
-            <div class="card-actions">
-
+            <div class="card-section" id="card-actions">
+                <div class="vertical layout center">
+                    <template is="dom-if" if="[[_hasData(scholar.interests)]]">
+                        <div class="info-items">
+                            <template is="dom-repeat" items="[[scholar.interests]]">
+                                <ge-info-item background-color="#FFEB3B" text="[[item]]"></ge-info-item>
+                            </template>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[_hasData(scholar.education)]]">
+                        <div class="info-items">
+                            <template is="dom-repeat" items="[[scholar.education]]">
+                                <ge-info-item background-color="#90CAF9" text="[[item.school]]"></ge-info-item>
+                            </template>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[_hasData(scholar.work)]]">
+                        <div class="info-items">
+                            <template is="dom-repeat" items="[[scholar.work]]">
+                                <ge-info-item background-color="#FF9800" text="[[item.company]]"></ge-info-item>
+                            </template>
+                        </div>
+                    </template>
+                </div>
             </div>
         </paper-material>
     </template>
 
-    <script src="../../bower_components/moment/moment.js"></script>
     <script>
         Polymer({
             is: "ge-scholar-card",
@@ -128,6 +179,11 @@
 
             _isSocialLinkSet(link) {
                 return validatorModule.isUrlValid(link);
+            },
+
+            _hasData: function(obj) {
+                console.log(obj);
+                return !validatorModule.isNullOrEmpty(obj);
             },
 
             computeAge: function() {
