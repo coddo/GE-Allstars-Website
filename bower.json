@@ -17,7 +17,9 @@
     "iron-image": "PolymerElements/iron-image#^1.2.3",
     "moment": "^2.14.1",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.2",
-    "paper-material": "PolymerElements/paper-material#^1.0.6"
+    "paper-material": "PolymerElements/paper-material#^1.0.6",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0",
+    "neon-animation": "PolymerElements/neon-animation#^1.2.4"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
