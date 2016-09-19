@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
+<dom-module id="ge-info-item">
+    <style is="custom-style">
+        :host {
+            display: block;
+            float: left;
+        }
+
+        #content {
+            cursor: pointer;
+            padding: 2px 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        #content span {
+            color: black;
+            font-size: 15px;
+        }
+
+    </style>
+    <template>
+        <paper-material class="no-select" id="content" style="background-color:[[backgroundColor]]" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
+            <span class="no-select">[[text]]</span>
+        </paper-material>
+    </template>
+    <script>
+        Polymer({
+            is: "ge-info-item",
+
+            properties: {
+                text: String,
+                backgroundColor: String
+            },
+
+            ready: function () {
+                this.defaultElevation = 1;
+                this.hoverElevation = 3;
+
+                this.set('currentElevation', this.defaultElevation);
+            },
+
+            _onCardEnter: function (e) {
+                this.set('currentElevation', this.hoverElevation);
+
+            },
+
+            _onCardLeave: function (e) {
+                this.set('currentElevation', this.defaultElevation);
+            }
+        });
+    </script>
+</dom-module>

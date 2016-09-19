@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<<dom-module id="ge-img">
+    <style>
+        :host {
+            display: block;
+            background-color: #BDBDBD;
+        }
+
+        div {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        span {
+            position: relative;
+            top: 50%;
+            color: white;
+            display: inline-block;
+        }
+    </style>
+    <template>
+        <div>
+            <template is="dom-if" if="[[shouldDisplayPrimaryPic]]">
+                <img src="[[src]]">
+            </template>
+            <template is="dom-if" if="[[shouldDisplaySecondaryPic]]">
+                <img src="[[altSrc]]">
+            </template>
+            <template is="dom-if" if="[[shouldDisplayText]]">
+                <span>[[text]]</span>
+            </template>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "ge-img",
+
+            properties: {
+                src: {
+                    type: String,
+                    notify: true,
+                    observer: "_updateDisplay",
+                },
+                altSrc: {
+                    type: String,
+                    notify: true,
+                    observer: "_updateDisplay",
+                },
+                altText: {
+                    type: String,
+                    notify: true,
+                    observer: "_updateDisplay",
+                },
+            },
+
+            ready: function() {
+                if (!validatorModule.isNullOrEmpty(this.altText)) {
+                    this.set('text', this.altText);
+                    return;
+                }
+
+                this.set('text', "No image set");
+
+                this.set('shouldDisplayPrimaryPic', false);
+                this.set('shouldDisplaySecondaryPic', false);
+                this.set('shouldDisplayText', true);
+            },
+
+            _updateDisplay: function() {
+                var hasSrc = !validatorModule.isNullOrEmpty(this.src);
+                var hasAltSrc = !validatorModule.isNullOrEmpty(this.altSrc);
+
+                var showSrc = hasSrc;
+                var showAltSrc = !hasSrc && hasAltSrc;
+                var showText = !hasSrc && !hasAltSrc;
+
+                this.set('shouldDisplayPrimaryPic', showSrc);
+                this.set('shouldDisplaySecondaryPic', showAltSrc);
+                this.set('shouldDisplayText', showText);
+            },
+        });
+    </script>
+    </dom-module>

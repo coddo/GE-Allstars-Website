@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="elements/ge-scholar-card.html">
+
+<dom-module id="ge-scholars">
+    <template>
+        <style>
+            #cards {
+                width: 100%;
+                height: 100%;
+                align-content: center;
+                align-items: center;
+                text-align: center;
+                padding-top: 50px;
+            }
+        </style>
+
+        <div id="cards">
+            <template is="dom-repeat" items="[[scholars]]">
+                <ge-scholar-card scholar="[[item]]"></ge-scholar-card>
+            </template>
+        </div>
+    </template>
+
+    <script src="../../bower_components/moment/moment.js"></script>
+    <script>
+        Polymer({
+            is: "ge-scholars",
+
+            hello: function(item) {
+                print(item);
+            },
+
+            ready: function() {
+                if (!validatorModule.isNullOrEmpty(this.scholars)) {
+                    return;
+                }
+
+                this.scholars = [];
+
+                var scholar = {
+                    profilePicture: "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-387179.jpg",
+                    // profilePicture: "",
+                    email: "scholar@geallstars.com",
+                    lastName: "GE Scholar",
+                    middleName: "The",
+                    firstName: "Coddo",
+                    birthday: "12 December 1993",
+                    sex: "M",
+                    scholarSince: "2015",
+                    phone: [
+                        "05616018919681",
+                        "08978916156165"
+                    ],
+                    education: [{
+                        school: "General Highschool of Justice",
+                        type: "Highschool",
+                        major: "Informatics and mathematics",
+                        location: "Deva, Romania",
+                        startDate: "September 2009",
+                        endDate: "October 2013",
+                    }, {
+                        school: "GE Scholars University",
+                        type: "Undergrad studies",
+                        major: "Computer Science",
+                        location: "Timisoara, Romania",
+                        startDate: "September 2013",
+                    }],
+                    work: [{
+                        company: "Facebook",
+                        position: "Software Engineer",
+                        industry: "IT",
+                        location: "Deva, Romania",
+                        startDate: "September 2009",
+                        endDate: "October 2013",
+                    }, {
+                        company: "Microsoft",
+                        position: "Full Stack Developer",
+                        industry: "IT",
+                        location: "Deva, Romania",
+                        startDate: "September 2009",
+                        endDate: "October 2013",
+                    }],
+                    bornIn: "Deva, Romania",
+                    livesIn: "Timisoara, Romania",
+                    interests: [
+                        "Photography",
+                        "Computer science",
+                        "Skying",
+                        "Travelling",
+                    ],
+                    bio: "Lorem ipsum dolor sit amet",
+                    // facebook: "Facebook link here",
+                    facebook: "https://www.facebook.com/claudiu.codoban.7",
+                    linkedIn: "LinkedIn link here",
+                    twitter: "Twitter link here",
+                    googlePlus: "Google+ link here",
+                };
+
+                var scholar2 = {
+                    profilePicture: "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-291393.jpg",
+                    // profilePicture: "",
+                    email: "scholar@geallstars.com",
+                    lastName: "Lester Smith",
+                    middleName: "Van",
+                    firstName: "Abrahimoviciasfsafsafsa",
+                    birthday: "12 December 1993",
+                    sex: "M",
+                    scholarSince: "2015",
+                    phone: [
+                        "05616018919681",
+                        "08978916156165"
+                    ],
+                    // education: [{
+                    //     school: "General Highschool of Justice",
+                    //     type: "Highschool",
+                    //     major: "Informatics and mathematics",
+                    //     location: "Deva, Romania",
+                    //     startDate: "September 2009",
+                    //     endDate: "October 2013",
+                    // }, {
+                    //     school: "GE Scholars University",
+                    //     type: "Undergrad studies",
+                    //     major: "Computer Science",
+                    //     location: "Timisoara, Romania",
+                    //     startDate: "September 2013",
+                    // }],
+                    work: [{
+                        company: "Facebook",
+                        position: "Software Engineer",
+                        industry: "IT",
+                        location: "Deva, Romania",
+                        startDate: "September 2009",
+                        endDate: "October 2013",
+                    }, {
+                        company: "Microsoft",
+                        position: "Full Stack Developer",
+                        industry: "IT",
+                        location: "Deva, Romania",
+                        startDate: "September 2009",
+                        endDate: "October 2015",
+                    }],
+                    bornIn: "Deva, Romania",
+                    livesIn: "Timisoara, Romania",
+                    interests: [
+                        "Photography",
+                        "Computer science",
+                        "Skying",
+                        "Travelling",
+                        "Skydiving",
+                        "Surfing"
+                    ],
+                    bio: "Lorem ipsum dolor sit amet",
+                    // facebook: "Facebook link here",
+                    facebook: "https://www.facebook.com/claudiu.codoban.7",
+                    linkedIn: "LinkedIn link here",
+                    twitter: "Twitter link here",
+                    googlePlus: "Google+ link here",
+                };
+
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar2);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar2);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar2);
+                this.push('scholars', scholar2);
+                this.push('scholars', scholar);
+                this.push('scholars', scholar);
+
+                this.scholars.forEach(function(item) {
+                    if (!validatorModule.isNullOrEmpty(item.education)) {
+                        item.education = item.education.sort(this.descDateComparer);
+                    }
+
+                    if (!validatorModule.isNullOrEmpty(item.work)) {
+                        item.work = item.work.sort(this.descDateComparer);
+                    }
+                });
+            },
+
+            descDateComparer: function(firstItem, secondItem) {
+                if (validatorModule.isNull(firstItem.endDate)) {
+                    if (validatorModule.isNull(secondItem.endDate)) {
+                        var firstDate = moment(firstItem.startDate, "MMMM YYYY");
+                        var secondDate = moment(secondItem.startDate, "MMMM YYYY");
+
+                        return firstDate.diff(secondDate, "months");
+                    }
+
+                    return 1;
+                } else if (validatorModule.isNull(secondItem.endDate)) {
+                    if (validatorModule.isNull(firstItem.endDate)) {
+                        var firstDate = moment(firstItem.startDate, "MMMM YYYY");
+                        var secondDate = moment(secondItem.startDate, "MMMM YYYY");
+
+                        return firstDate.diff(secondDate, "months");
+                    }
+
+                    return 1;
+                }
+
+                var firstDate = moment(firstItem.endDate, "MMMM YYYY");
+                var secondDate = moment(secondItem.endDate, "MMMM YYYY");
+
+                return firstDate.diff(secondDate, "months");
+            }
+        });
+    </script>
+</dom-module>
