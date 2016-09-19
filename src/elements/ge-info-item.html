@@ -12,7 +12,7 @@
 
         #content {
             cursor: pointer;
-            padding: 2px 5px 2px 5px;
+            padding: 2px 5px;
             margin-right: 5px;
             margin-bottom: 5px;
         }
@@ -21,9 +21,10 @@
             color: black;
             font-size: 15px;
         }
+
     </style>
     <template>
-        <paper-material class= "no-select" id="content" style="background-color:[[backgroundColor]]" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
+        <paper-material class="no-select" id="content" style="background-color:[[backgroundColor]]" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <span class="no-select">[[text]]</span>
         </paper-material>
     </template>
@@ -33,24 +34,24 @@
 
             properties: {
                 text: String,
-                backgroundColor: String,
+                backgroundColor: String
             },
 
-            ready: function() {
+            ready: function () {
                 this.defaultElevation = 1;
                 this.hoverElevation = 3;
 
                 this.set('currentElevation', this.defaultElevation);
             },
 
-            _onCardEnter: function(e) {
+            _onCardEnter: function (e) {
                 this.set('currentElevation', this.hoverElevation);
 
             },
 
-            _onCardLeave: function(e) {
+            _onCardLeave: function (e) {
                 this.set('currentElevation', this.defaultElevation);
-            },
+            }
         });
     </script>
 </dom-module>

@@ -30,7 +30,7 @@
                 height: 70%;
             }
 
-            #card-header .profile-picture {
+            #card-header #profile-picture {
                 position: relative;
                 width: 100%;
                 height: 100%;
@@ -88,11 +88,12 @@
                 overflow: hidden;
                 margin-bottom: 8px;
             }
+
         </style>
 
         <paper-material class="card no-select" animated="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" elevation="[[currentElevation]]">
             <div class="card-section" id="card-header">
-                <ge-img class="profile-picture" src="[[scholar.profilePicture]]" alt-src="../../images/ge-logo.png"></ge-img>
+                <ge-img id="profile-picture" src="[[scholar.profilePicture]]" alt-src="[[_genericPersonImage(scholar.sex)]]"></ge-img>
                 <p class="scholar-name">[[scholar.firstName]] [[scholar.middleName]] [[scholar.lastName]]</p>
                 <div class="social-links">
                     <template is="dom-if" if="[[_isSocialLinkSet(scholar.facebook)]]">
@@ -156,11 +157,11 @@
             properties: {
                 scholar: {
                     type: Object,
-                    notify: true,
-                },
+                    notify: true
+                }
             },
 
-            ready: function() {
+            ready: function () {
                 this.computeAge();
 
                 this.defaultElevation = 3;
@@ -169,30 +170,44 @@
                 this.set('currentElevation', this.defaultElevation);
             },
 
-            _onCardEnter: function(e) {
+            _onCardEnter: function (e) {
                 this.set('currentElevation', this.hoverElevation);
 
             },
 
-            _onCardLeave: function(e) {
+            _onCardLeave: function (e) {
                 this.set('currentElevation', this.defaultElevation);
             },
 
-            _isSocialLinkSet(link) {
+            _isSocialLinkSet: function(link) {
                 return validatorModule.isUrlValid(link);
             },
 
-            _hasData: function(obj) {
+            _hasData: function (obj) {
                 return !validatorModule.isNullOrEmpty(obj);
             },
 
-            computeAge: function() {
+            _genericPersonImage: function (sex) {
+                if (validatorModule.isNullOrEmpty(sex)) {
+                    return "../../images/unknown.png";
+                }
+
+                if (sex === "M") {
+                    return "../../images/male.png";
+                }
+
+                if (sex === "F") {
+                    return "../../images/female.png";
+                }
+            },
+
+            computeAge: function () {
                 var birthDate = moment(this.scholar.birthday, "DD MMMM YYYY");
                 var now = moment();
 
                 // this.scholar.age = now.diff(birthDate, 'years');
                 this.set('scholar.age', now.diff(birthDate, 'years'));
-            },
+            }
         });
     </script>
 </dom-module>

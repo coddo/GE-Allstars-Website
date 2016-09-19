@@ -6,6 +6,7 @@
     <style>
         :host {
             display: block;
+            background-color: #BDBDBD;
         }
 
         div {
@@ -22,16 +23,19 @@
         span {
             position: relative;
             top: 50%;
-            color: black;
+            color: white;
             display: inline-block;
         }
     </style>
     <template>
         <div>
-            <template is="dom-if" if="[[hasImage]]">
-                <img src="[[image]]">
+            <template is="dom-if" if="[[shouldDisplayPrimaryPic]]">
+                <img src="[[src]]">
             </template>
-            <template is="dom-if" if="[[!hasImage]]">
+            <template is="dom-if" if="[[shouldDisplaySecondaryPic]]">
+                <img src="[[altSrc]]">
+            </template>
+            <template is="dom-if" if="[[shouldDisplayText]]">
                 <span>[[text]]</span>
             </template>
         </div>
@@ -41,33 +45,48 @@
             is: "ge-img",
 
             properties: {
-                src: String,
-                altSrc: String,
-                altText: String,
+                src: {
+                    type: String,
+                    notify: true,
+                    observer: "_updateDisplay",
+                },
+                altSrc: {
+                    type: String,
+                    notify: true,
+                    observer: "_updateDisplay",
+                },
+                altText: {
+                    type: String,
+                    notify: true,
+                    observer: "_updateDisplay",
+                },
             },
 
             ready: function() {
-                this.set('hasImage', true);
-
-                if (validatorModule.isUrlValid(this.src)) {
-                    this.set('image', this.src);
-                    return;
-                }
-
-                if (!validatorModule.isNullOrEmpty(this.altSrc)) {
-                    this.set('image', this.altSrc);
-                    return;
-                }
-
-                this.set('hasImage', false);
-
                 if (!validatorModule.isNullOrEmpty(this.altText)) {
                     this.set('text', this.altText);
                     return;
                 }
 
                 this.set('text', "No image set");
-            }
+
+                this.set('shouldDisplayPrimaryPic', false);
+                this.set('shouldDisplaySecondaryPic', false);
+                this.set('shouldDisplayText', true);
+            },
+
+            _updateDisplay: function() {
+                var hasSrc = !validatorModule.isNullOrEmpty(this.src);
+                var hasAltSrc = !validatorModule.isNullOrEmpty(this.altSrc);
+
+                var showSrc = hasSrc;
+                var showAltSrc = !hasSrc && hasAltSrc;
+                var showText = !hasSrc && !hasAltSrc;
+
+                this.set('shouldDisplayPrimaryPic', showSrc);
+                this.set('shouldDisplaySecondaryPic', showAltSrc);
+                this.set('shouldDisplayText', showText);
+            },
         });
     </script>
     </dom-module>
