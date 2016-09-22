@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+
+<dom-module id="ge-scholar-social-links">
+    <template>
+        <style>
+            .social-links {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .social-links a {
+                text-decoration: none;
+            }
+
+            .social-links paper-tooltip {
+                --paper-tooltip-text-color: var(--app-color-white);
+            }
+
+            .social-links .social-button {
+                height: 40px;
+                width: 40px;
+            }
+        </style>
+
+        <div class="social-links">
+            <template is="dom-if" if="[[_isSocialLinkSet(scholar.facebook)]]">
+                <a target="_blank" href="[[scholar.facebook]]">
+                    <paper-icon-button class="social-button" id="facebook-btn" src="../../images/f-b-logo.png"></paper-icon-button>
+                    <paper-tooltip for="facebook-btn" offset="0" animation-delay="250">Facebook profile</paper-tooltip>
+                </a>
+            </template>
+            <template is="dom-if" if="[[_isSocialLinkSet(scholar.linkedIn)]]">
+                <a target="_blank" href="[[scholar.linkedIn]]">
+                    <paper-icon-button class="social-button" id="linkedin-btn" src="../../images/lkdin-logo.png"></paper-icon-button>
+                    <paper-tooltip for="linkedin-btn" offset="0" animation-delay="250">LinkedIn profile</paper-tooltip>
+                </a>
+            </template>
+            <template is="dom-if" if="[[_isSocialLinkSet(scholar.twitter)]]">
+                <a target="_blank" href="[[scholar.twitter]]">
+                    <paper-icon-button class="social-button" id="twitter-btn" src="../../images/twt-logo.png"></paper-icon-button>
+                    <paper-tooltip for="twitter-btn" offset="0" animation-delay="250">Twitter profile</paper-tooltip>
+                </a>
+            </template>
+            <template is="dom-if" if="[[_isSocialLinkSet(scholar.googlePlus)]]">
+                <a target="_blank" href="[[scholar.googlePlus]]">
+                    <paper-icon-button class="social-button" id="gplus-btn" src="../../images/g-plus-logo.png"></paper-icon-button>
+                    <paper-tooltip for="gplus-btn" offset="0" animation-delay="250">Google+ profile</paper-tooltip>
+                </a>
+            </template>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'ge-scholar-social-links',
+
+            properties: {
+                scholar: Object
+            },
+
+            _isSocialLinkSet: function (link) {
+                return true;
+                return validatorModule.isUrlValid(link);
+            },
+        });
+    </script>
+</dom-module>

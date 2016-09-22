@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="ge-round-img.html">
+<link rel="import" href="ge-scholar-social-links.html">
+
+<dom-module id="ge-scholar-profile">
+    <template>
+        <style is="custom-style include=" iron-flex iron-flex-alignment"">
+            :host {
+                width: 100%;
+                height: 100%;
+            }
+
+            .header-item {
+                font-size: 17px;
+                margin: 5px;
+                padding: 0;
+            }
+
+            #profile-body a,
+            #profile-body p,
+            #profile-body span,
+            #profile-header a,
+            #profile-header p,
+            #profile-header span {
+                color: var(--app-color-white);
+            }
+
+            #profile-header {
+                float: left;
+                position: relative;
+                width: 100%;
+                height: 40%;
+                background-color: var(--app-color-blue);
+            }
+
+            #profile-header #social-links {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+            }
+
+            #profile-header #profile-picture {
+                width: 200px;
+                height: 200px;
+                display: inline-block;
+                margin-top: 25px;
+            }
+
+            #profile-header #scholar-name {
+                font-size: 25px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            #profile-body {
+                float: left;
+                position: relative;
+                width: 100%;
+                background-color: var(--app-color-gray);
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+        </style>
+
+        <div id="profile-header" layout vertical center>
+            <ge-round-img class="header-item" id="profile-picture" src="[[scholar.profilePicture]]" alt-src="[[_genericPersonImage(scholar.sex)]]"></ge-round-img>
+            <ge-scholar-social-links id="social-links" scholar="[[scholar]]"></ge-scholar-social-links>
+            <p class="header-item" id="scholar-name">[[scholar.fullName]]</p>
+            <a class="header-item" id="scholar-email" href="mailto:[[scholar.email]]">[[scholar.email]]</a>
+            <p class="header-item" id="scholar-phone">[[scholar.phone]]</p>
+        </div>
+        <div id="profile-body">
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+            <p>RANDOM CONTENT HERE</p>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'ge-scholar-profile',
+
+            properties: {
+                scholar: Object
+            },
+
+            _genericPersonImage: function (sex) {
+                return userModule.getGenericProfilePicture(sex);
+            }
+        });
+    </script>
+</dom-module>
