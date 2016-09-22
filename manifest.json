@@ -1,20 +1,7 @@
 {
   "name": "GE Allstars",
   "short_name": "GE Allstars",
-  "icons": [{
-        "src": "images/ge-logo.png",
-        "type": "image/png",
-        "sizes": "64x64"
-    },
-    {
-        "src": "images/ge-logo-blue.png",
-        "type": "image/png",
-        "sizes": "64x64"
-    },
-    {
-        "src": "images/404-unicorn.jpg",
-        "type": "image/jpg"
-    }],
+  "icons": [],
   "start_url": "/",
   "display": "standalone",
   "background_color": "#3f51b5",
