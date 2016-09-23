@@ -15,6 +15,12 @@
 <dom-module id="ge-scholar-card">
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment">
+            :host {
+                --color-info-interests: #00BCD4;
+                --color-info-education: #03A9F4;
+                --color-info-work: #2196F3;
+            }
+
             .card {
                 background-color: var(--app-color-white);
                 display: inline-block;
@@ -74,6 +80,30 @@
                 margin-bottom: 8px;
             }
 
+            #card-actions .section-placeholder {
+                color: var(--app-color-gray);
+                margin: 0 0 10px;
+                padding: 2px 10px;
+                border: 1px solid;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            #card-actions #placeholder-interests {
+                border-color: var(--color-info-interests);
+                color: var(--color-info-interests);
+            }
+
+            #card-actions #placeholder-education {
+                border-color: var(--color-info-education);
+                color: var(--color-info-education);
+            }
+
+            #card-actions #placeholder-work {
+                border-color: var(--color-info-work);
+                color: var(--color-info-work);
+            }
+
             #viewProfileDialog {
                 width: 90%;
                 height: 100%;
@@ -110,23 +140,32 @@
                     <template is="dom-if" if="[[_hasData(scholar.interests)]]">
                         <div class="info-items no-select">
                             <template is="dom-repeat" items="[[scholar.interests]]">
-                                <ge-info-item background-color="#FFEB3B" text="[[item]]"></ge-info-item>
+                                <ge-info-item background-color="#00BCD4" text="[[item]]"></ge-info-item>
                             </template>
                         </div>
+                    </template>
+                    <template is="dom-if" if="[[!_hasData(scholar.interests)]]">
+                        <p class="section-placeholder" id="placeholder-interests">No interests were specified</p>
                     </template>
                     <template is="dom-if" if="[[_hasData(scholar.education)]]">
                         <div class="info-items no-select">
                             <template is="dom-repeat" items="[[scholar.education]]">
-                                <ge-info-item background-color="#90CAF9" text="[[item.school]]"></ge-info-item>
+                                <ge-info-item background-color="#03A9F4" text="[[item.school]]"></ge-info-item>
                             </template>
                         </div>
+                    </template>
+                    <template is="dom-if" if="[[!_hasData(scholar.education)]]">
+                        <p class="section-placeholder" id="placeholder-education">No education background was specified</p>
                     </template>
                     <template is="dom-if" if="[[_hasData(scholar.work)]]">
                         <div class="info-items no-select">
                             <template is="dom-repeat" items="[[scholar.work]]">
-                                <ge-info-item background-color="#FF9800" text="[[item.company]]"></ge-info-item>
+                                <ge-info-item background-color="#2196F3" text="[[item.company]]"></ge-info-item>
                             </template>
                         </div>
+                    </template>
+                    <template is="dom-if" if="[[!_hasData(scholar.work)]]">
+                        <p class="section-placeholder" id="placeholder-work">No work experience was specified</p>
                     </template>
                 </div>
             </div>
@@ -169,7 +208,7 @@
             _onCardLeave: function (e) {
                 this.set('currentElevation', this.defaultElevation);
             },
-            
+
             _hasData: function (obj) {
                 return !validatorModule.isNullOrEmpty(obj);
             },
