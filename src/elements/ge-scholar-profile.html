@@ -15,27 +15,45 @@
                 padding-bottom: 20px;
             }
 
-            .header-item {
-                font-size: 17px;
-                margin: 5px;
+            .body-section {
+                float: left;
+                position: relative;
+                width: 100%;
                 padding: 0;
+                background-color: var(--app-color-white);
             }
 
-            #profile-body a,
-            #profile-body p,
-            #profile-body span,
-            #profile-header a,
-            #profile-header p,
-            #profile-header span {
+            .story-section {
+                min-height: 500px;
+            }
+
+            .story-section > h1 {
+                position: relative;
+                left: 50px;
+                top: 30px;
+                text-align: left;
+                margin-bottom: 50px;
+                color: var(--app-color-white);
+            }
+
+            .body-section a,
+            .body-section a,
+            .body-section p,
+            .body-section p,
+            .body-section span,
+            .body-section span {
                 color: var(--app-color-white);
             }
 
             #profile-header {
-                float: left;
-                position: relative;
-                width: 100%;
                 height: 40%;
                 background-color: var(--app-color-blue);
+            }
+
+            #profile-header .header-item {
+                font-size: 17px;
+                margin: 5px;
+                padding: 0;
             }
 
             #profile-header #social-links {
@@ -52,72 +70,85 @@
             }
 
             #profile-header #scholar-name {
-                font-size: 25px;
-                font-weight: bold;
+                font-size: 30px;
                 margin-bottom: 10px;
+                color: var(--app-color-white);
             }
 
-            #profile-body {
-                float: left;
-                position: relative;
-                width: 100%;
-                background-color: var(--app-color-gray);
-                padding-top: 20px;
-                padding-bottom: 10px;
+            #bio-section {
+                background-color: var(--app-color-blue-gray);
+                text-align: center;
+                padding-bottom: 5%;
             }
 
-            #profile-body .body-section {
-                position: relative;
-                width: 90%;
-                height: 300px;
-                left: 5%;
-                margin: 20px 0 0;
-                padding: 0;
-                text-align: left;
-                background-color: var(--app-color-white);
+            #bio-section > span {
+                float: inherit;
+                white-space: pre-wrap;
+                font-size: 20px;
+                max-width: 90%;
+                margin-top: 5%;
+                margin-left: 5%;
             }
 
-            #profile-body .body-section h1 {
-                position: relative;
-                left: 50px;
-                top: 30px;
-                margin-bottom: 50px;
-                color: var(--app-color-gray);
+            #personal-section {
+                background-color: var(--app-color-blue);
+            }
+
+            #interests-section {
+                background-color: var(--app-color-blue-gray);
+            }
+
+            #projects-section {
+                background-color: var(--app-color-blue);
+            }
+
+            #education-section {
+                background-color: var(--app-color-blue-gray);
+            }
+
+            #work-section {
+                background-color: var(--app-color-blue);
             }
 
         </style>
 
-        <div id="profile-header" layout vertical center>
+        <paper-material class="body-section" id="profile-header" layout vertical center>
             <ge-round-img class="header-item" id="profile-picture" src="[[scholar.profilePicture]]" alt-src="[[_genericPersonImage(scholar.sex)]]"></ge-round-img>
             <ge-scholar-social-links id="social-links" scholar="[[scholar]]"></ge-scholar-social-links>
-            <p class="header-item" id="scholar-name">[[scholar.fullName]]</p>
+            <h1 class="header-item" id="scholar-name">[[scholar.fullName]]</h1>
             <a class="header-item" id="scholar-email" href="mailto:[[scholar.email]]">[[scholar.email]]</a>
-            <p class="header-item">Scholar Leader since: [[scholar.scholarSince]]</p>
-        </div>
-        <div id="profile-body">
-            <paper-material class="body-section" elevation="2" layout vertical left>
-                <h1>Section</h1>
+            <p class="header-item">[[scholar.motto]]</p>
+        </paper-material>
+        <template is="dom-if" if="[[_shouldDisplayBio(scholar)]]">
+            <paper-material class="body-section story-section" id="bio-section" layout vertical center>
+                <span>[[scholar.bio]]</span>
             </paper-material>
-            <paper-material class="body-section" elevation="2">
-                <h1>Section</h1>
+        </template>
+        <template is="dom-if" if="[[_shouldDisplayPersonal(scholar)]]">
+            <paper-material class="body-section story-section" id="personal-section" layout vertical left>
+                <h1>Personal information</h1>
             </paper-material>
-            <paper-material class="body-section" elevation="2">
-                <h1>Section</h1>
+        </template>
+        <template is="dom-if" if="[[_shouldDisplayInterests(scholar)]]">
+            <paper-material class="body-section story-section" id="interests-section" layout vertical left>
+                <h1>My interests</h1>
             </paper-material>
-            <paper-material class="body-section" elevation="2">
-                <h1>Section</h1>
+        </template>
+        <template is="dom-if" if="[[_shouldDisplayProjects(scholar)]]">
+            <paper-material class="body-section story-section" id="projects-section" layout vertical left>
+                <h1>My projects</h1>
             </paper-material>
-            <paper-material class="body-section" elevation="2">
-                <h1>Section</h1>
+        </template>
+        <template is="dom-if" if="[[_shouldDisplayEducation(scholar)]]">
+            <paper-material class="body-section story-section" id="education-section" layout vertical left>
+                <h1>My education</h1>
             </paper-material>
-            <paper-material class="body-section" elevation="2">
-                <h1>Section</h1>
+        </template>
+        <template is="dom-if" if="[[_shouldDisplayWorkExperience()]]">
+            <paper-material class="body-section story-section" id="work-section" layout vertical left>
+                <h1>My work experience</h1>
             </paper-material>
-            <paper-material class="body-section" elevation="2">
-                <h1>Section</h1>
-            </paper-material>
-        </div>
-
+        </template>
     </template>
     <script>
         Polymer({
@@ -129,6 +160,30 @@
 
             _genericPersonImage: function (sex) {
                 return userModule.getGenericProfilePicture(sex);
+            },
+
+            _shouldDisplayBio(scholar) {
+                return !validatorModule.isNullOrEmpty(scholar.bio);
+            },
+
+            _shouldDisplayPersonal(scholar) {
+                return true;
+            },
+
+            _shouldDisplayInterests(scholar) {
+                return true;
+            },
+
+            _shouldDisplayProjects(scholar) {
+                return true;
+            },
+
+            _shouldDisplayEducation(scholar) {
+                return true;
+            },
+
+            _shouldDisplayWorkExperience(scholar) {
+                return true;
             }
         });
     </script>
