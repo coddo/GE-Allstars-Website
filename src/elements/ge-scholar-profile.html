@@ -2,15 +2,17 @@
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="ge-round-img.html">
 <link rel="import" href="ge-scholar-social-links.html">
 
 <dom-module id="ge-scholar-profile">
     <template>
-        <style is="custom-style include=" iron-flex iron-flex-alignment"">
+        <style is="custom-style" include="iron-flex iron-flex-alignment">
             :host {
                 width: 100%;
                 height: 100%;
+                padding-bottom: 20px;
             }
 
             .header-item {
@@ -60,8 +62,27 @@
                 position: relative;
                 width: 100%;
                 background-color: var(--app-color-gray);
-                padding-top: 10px;
+                padding-top: 20px;
                 padding-bottom: 10px;
+            }
+
+            #profile-body .body-section {
+                position: relative;
+                width: 90%;
+                height: 300px;
+                left: 5%;
+                margin: 20px 0 0;
+                padding: 0;
+                text-align: left;
+                background-color: var(--app-color-white);
+            }
+
+            #profile-body .body-section h1 {
+                position: relative;
+                left: 50px;
+                top: 30px;
+                margin-bottom: 50px;
+                color: var(--app-color-gray);
             }
 
         </style>
@@ -71,17 +92,30 @@
             <ge-scholar-social-links id="social-links" scholar="[[scholar]]"></ge-scholar-social-links>
             <p class="header-item" id="scholar-name">[[scholar.fullName]]</p>
             <a class="header-item" id="scholar-email" href="mailto:[[scholar.email]]">[[scholar.email]]</a>
-            <p class="header-item" id="scholar-phone">[[scholar.phone]]</p>
+            <p class="header-item">Scholar Leader since: [[scholar.scholarSince]]</p>
         </div>
         <div id="profile-body">
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
-            <p>RANDOM CONTENT HERE</p>
+            <paper-material class="body-section" elevation="2" layout vertical left>
+                <h1>Section</h1>
+            </paper-material>
+            <paper-material class="body-section" elevation="2">
+                <h1>Section</h1>
+            </paper-material>
+            <paper-material class="body-section" elevation="2">
+                <h1>Section</h1>
+            </paper-material>
+            <paper-material class="body-section" elevation="2">
+                <h1>Section</h1>
+            </paper-material>
+            <paper-material class="body-section" elevation="2">
+                <h1>Section</h1>
+            </paper-material>
+            <paper-material class="body-section" elevation="2">
+                <h1>Section</h1>
+            </paper-material>
+            <paper-material class="body-section" elevation="2">
+                <h1>Section</h1>
+            </paper-material>
         </div>
 
     </template>
