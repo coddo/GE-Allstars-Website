@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/scale-down-animation.html">
 <link rel="import" href="ge-info-item.html">
@@ -19,6 +20,14 @@
                 --color-info-interests: #00BCD4;
                 --color-info-education: #03A9F4;
                 --color-info-work: #2196F3;
+            }
+
+            paper-tooltip.big {
+                --paper-tooltip: {
+                    font-size: 14px;
+                    background: var(--app-color-blue);
+                    z-index: 1;
+                }
             }
 
             .card {
@@ -48,7 +57,7 @@
                 margin: 0;
             }
 
-            #card-header .scholar-name {
+            #card-header #scholar-name {
                 font-size: 24px;
                 font-weight: 400;
                 color: var(--app-color-white);
@@ -132,7 +141,8 @@
         <paper-material id="scholar-card" class="card no-select" animated="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" on-tap="_showProfileDialog" elevation="[[currentElevation]]">
             <div class="card-section" id="card-header">
                 <ge-img id="profile-picture" src="[[scholar.profilePicture]]" alt-src="[[_genericPersonImage(scholar.sex)]]"></ge-img>
-                <p class="scholar-name">[[scholar.fullName]]</p>
+                <p id="scholar-name">[[scholar.fullName]]</p>
+                <paper-tooltip class="big" for="scholar-name" offset="0">[[scholar.fullName]]</paper-tooltip>
                 <ge-scholar-social-links scholar="[[scholar]]"></ge-scholar-social-links>
             </div>
             <div class="card-section" id="card-actions">

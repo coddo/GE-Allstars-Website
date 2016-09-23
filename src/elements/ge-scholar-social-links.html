@@ -7,6 +7,14 @@
 <dom-module id="ge-scholar-social-links">
     <template>
         <style>
+            paper-tooltip.big {
+                --paper-tooltip: {
+                    font-size: 14px;
+                    background: var(--app-color-blue);
+                    z-index: 1;
+                }
+            }
+
             .social-links {
                 position: absolute;
                 left: 0;
@@ -25,31 +33,32 @@
                 height: 40px;
                 width: 40px;
             }
+
         </style>
 
         <div class="social-links">
             <template is="dom-if" if="[[_isSocialLinkSet(scholar.facebook)]]">
                 <a target="_blank" href="[[scholar.facebook]]">
                     <paper-icon-button class="social-button" id="facebook-btn" src="../../images/f-b-logo.png"></paper-icon-button>
-                    <paper-tooltip for="facebook-btn" offset="0" animation-delay="250">Facebook profile</paper-tooltip>
+                    <paper-tooltip class="big" for="facebook-btn" offset="0" animation-delay="250">Facebook profile</paper-tooltip>
                 </a>
             </template>
             <template is="dom-if" if="[[_isSocialLinkSet(scholar.linkedIn)]]">
                 <a target="_blank" href="[[scholar.linkedIn]]">
                     <paper-icon-button class="social-button" id="linkedin-btn" src="../../images/lkdin-logo.png"></paper-icon-button>
-                    <paper-tooltip for="linkedin-btn" offset="0" animation-delay="250">LinkedIn profile</paper-tooltip>
+                    <paper-tooltip class="big" for="linkedin-btn" offset="0" animation-delay="250">LinkedIn profile</paper-tooltip>
                 </a>
             </template>
             <template is="dom-if" if="[[_isSocialLinkSet(scholar.twitter)]]">
                 <a target="_blank" href="[[scholar.twitter]]">
                     <paper-icon-button class="social-button" id="twitter-btn" src="../../images/twt-logo.png"></paper-icon-button>
-                    <paper-tooltip for="twitter-btn" offset="0" animation-delay="250">Twitter profile</paper-tooltip>
+                    <paper-tooltip class="big" for="twitter-btn" offset="0" animation-delay="250">Twitter profile</paper-tooltip>
                 </a>
             </template>
             <template is="dom-if" if="[[_isSocialLinkSet(scholar.googlePlus)]]">
                 <a target="_blank" href="[[scholar.googlePlus]]">
                     <paper-icon-button class="social-button" id="gplus-btn" src="../../images/g-plus-logo.png"></paper-icon-button>
-                    <paper-tooltip for="gplus-btn" offset="0" animation-delay="250">Google+ profile</paper-tooltip>
+                    <paper-tooltip class="big" for="gplus-btn" offset="0" animation-delay="250">Google+ profile</paper-tooltip>
                 </a>
             </template>
         </div>
@@ -66,7 +75,7 @@
             _isSocialLinkSet: function (link) {
                 return true;
                 return validatorModule.isUrlValid(link);
-            },
+            }
         });
     </script>
 </dom-module>
