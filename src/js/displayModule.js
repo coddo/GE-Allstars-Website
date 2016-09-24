@@ -1,4 +1,4 @@
-var userModule = function() {
+var displayModule = function() {
 	function getGenericProfilePicture(sex) {
 		if (validatorModule.isNullOrEmpty(sex)) {
 			return "../../images/unknown.png";
@@ -13,7 +13,24 @@ var userModule = function() {
 		}
 	}
 
+	function getGenderText(genderSymbol) {
+		if (validatorModule.isNullOrEmpty(genderSymbol)) {
+			return "Not specified";
+		}
+
+		if (genderSymbol == "M") {
+			return "Male";
+		}
+
+		if (genderSymbol == "F") {
+			return "Female";
+		}
+
+		return "Not specified";
+	}
+
 	return {
 		getGenericProfilePicture: getGenericProfilePicture,
+		getGenderText: getGenderText,
 	}
 }();

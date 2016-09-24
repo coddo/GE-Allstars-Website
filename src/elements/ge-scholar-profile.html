@@ -107,6 +107,12 @@
         <template is="dom-if" if="[[_shouldDisplayPersonal(scholar)]]">
             <paper-material class="body-section story-section" id="personal-section" layout vertical left>
                 <h1>Personal information</h1>
+                <!-- birthday: "12 December 1993",
+                sex: "M",
+                bornIn: "Deva, Romania",
+                livesIn: "Timisoara, Romania",
+                scholarSince: "2015",
+                phone: "05616018919681", -->
             </paper-material>
         </template>
         <template is="dom-if" if="[[_shouldDisplayInterests(scholar)]]">
@@ -139,7 +145,7 @@
             },
 
             _genericPersonImage: function (sex) {
-                return userModule.getGenericProfilePicture(sex);
+                return displayModule.getGenericProfilePicture(sex);
             },
 
             _shouldDisplayPersonal(scholar) {
