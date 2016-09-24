@@ -134,12 +134,17 @@
         </template>
 
     </template>
+
+    <script src="../../bower_components/moment/moment.js"></script>
     <script>
         Polymer({
             is: 'ge-scholar-profile',
 
             properties: {
-                scholar: Object,
+                scholar: {
+                    type: Object,
+                    value: this._defaultScholarValue,
+                },
                 elevation: Number,
             },
 
@@ -165,7 +170,119 @@
 
             _shouldDisplayWorkExperience(scholar) {
                 return true;
-            }
+            },
+
+            ready: function () {
+                if (validatorModule.isNull(this.scholar)) {
+                    return;
+                }
+
+                this.initializeScholar();
+            },
+
+            _defaultScholarValue: function() {
+                return {
+                    profilePicture: "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-387179.jpg",
+                    email: "scholar@geallstars.com",
+                    username: "CoddoTheGEScholar",
+                    lastName: "GE Scholar",
+                    firstName: "Coddo The",
+                    birthday: "12 December 1993",
+                    sex: "M",
+                    bornIn: "Deva, Romania",
+                    livesIn: "Timisoara, Romania",
+                    scholarSince: "2015",
+                    phone: "05616018919681",
+                    motto: "Truth defies reality",
+                    education: [
+                        {
+                            school: "General Highschool of Justice",
+                            type: "Highschool",
+                            major: "Informatics and mathematics",
+                            location: "Deva, Romania",
+                            startDate: "September 2009",
+                            endDate: "October 2013"
+                        }, {
+                            school: "GE Scholars University",
+                            type: "Undergrad studies",
+                            major: "Computer Science",
+                            location: "Timisoara, Romania",
+                            startDate: "September 2013"
+                        }
+                    ],
+                    work: [
+                        {
+                            company: "Facebook",
+                            position: "Software Engineer",
+                            industry: "IT",
+                            location: "Deva, Romania",
+                            startDate: "September 2009",
+                            endDate: "October 2013"
+                        }, {
+                            company: "Microsoft",
+                            position: "Full Stack Developer",
+                            industry: "IT",
+                            location: "Deva, Romania",
+                            startDate: "September 2009",
+                            endDate: "October 2013"
+                        }
+                    ],
+                    interests: [
+                        "Photography", "Computer science", "Skying", "Travelling"
+                    ],
+                    facebook: "https://www.facebook.com/claudiu.codoban.7",
+                    linkedIn: "LinkedIn link here",
+                    twitter: "Twitter link here",
+                    googlePlus: "Google+ link here"
+                };
+            },
+
+            initializeScholar: function() {
+                this.set('scholar.age', this.computeAge());
+                this.set('scholar.fullName', this.scholar.firstName + " " + this.scholar.lastName);
+
+                if (!validatorModule.isNullOrEmpty(this.scholar.education)) {
+                    this.set('scholar.education', this.scholar.education.sort(this.descDateComparer));
+                }
+
+                if (!validatorModule.isNullOrEmpty(this.scholar.work)) {
+                    this.set('scholar.work', this.scholar.work.sort(this.descDateComparer));
+                }
+            },
+
+            computeAge: function () {
+                var birthDate = moment(this.scholar.birthday, "DD MMMM YYYY");
+                var now = moment();
+
+                return now.diff(birthDate, 'years');
+            },
+
+            descDateComparer: function (firstItem, secondItem) {
+                if (validatorModule.isNull(firstItem.endDate)) {
+                    if (validatorModule.isNull(secondItem.endDate)) {
+                        var firstDate = moment(firstItem.startDate, "MMMM YYYY");
+                        var secondDate = moment(secondItem.startDate, "MMMM YYYY");
+
+                        return firstDate.diff(secondDate, "months");
+                    }
+
+                    return 1;
+                } else if (validatorModule.isNull(secondItem.endDate)) {
+                    if (validatorModule.isNull(firstItem.endDate)) {
+                        var firstDate = moment(firstItem.startDate, "MMMM YYYY");
+                        var secondDate = moment(secondItem.startDate, "MMMM YYYY");
+
+                        return firstDate.diff(secondDate, "months");
+                    }
+
+                    return 1;
+                }
+
+                var firstDate = moment(firstItem.endDate, "MMMM YYYY");
+                var secondDate = moment(secondItem.endDate, "MMMM YYYY");
+
+                return firstDate.diff(secondDate, "months");
+            },
         });
     </script>
 </dom-module>

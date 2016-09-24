@@ -129,7 +129,7 @@
 
             #viewProfileDialog paper-dialog-scrollable {
                 position: relative;
-                padding: 0 4% 25px 4%;
+                padding: 0 4% 25px;
                 margin-top: 0;
                 overflow: scroll;
                 @apply(--layout-flex);
@@ -140,7 +140,7 @@
         <paper-material id="scholar-card" class="card no-select" animated="true" on-mouseover="_onCardEnter" on-mouseout="_onCardLeave" on-tap="_showProfileDialog" elevation="[[currentElevation]]">
             <div class="card-section" id="card-header">
                 <ge-img id="profile-picture" src="[[scholar.profilePicture]]" alt-src="[[_genericPersonImage(scholar.sex)]]"></ge-img>
-                <p id="scholar-name">[[scholar.fullName]]</p>
+                <p id="scholar-name">[[_scholarFullName(scholar)]]</p>
                 <paper-tooltip class="big" for="scholar-name" offset="0">[[scholar.fullName]]</paper-tooltip>
                 <ge-scholar-social-links scholar="[[scholar]]"></ge-scholar-social-links>
             </div>
@@ -200,13 +200,14 @@
             },
 
             ready: function () {
-                this.computeAge();
-
                 this.defaultElevation = 3;
                 this.hoverElevation = 5;
 
                 this.set('currentElevation', this.defaultElevation);
-                this.set('scholar.fullName', this.scholar.firstName + " " + this.scholar.lastName)
+            },
+
+            _scholarFullName: function (scholar) {
+                return scholar.firstName + " " + scholar.lastName;
             },
 
             _onCardEnter: function (e) {
@@ -235,14 +236,6 @@
 
                 this.$.viewProfileDialog.toggle();
             },
-
-            computeAge: function () {
-                var birthDate = moment(this.scholar.birthday, "DD MMMM YYYY");
-                var now = moment();
-
-                // this.scholar.age = now.diff(birthDate, 'years');
-                this.set('scholar.age', now.diff(birthDate, 'years'));
-            }
         });
     </script>
 </dom-module>

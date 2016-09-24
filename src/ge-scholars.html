@@ -23,7 +23,6 @@
         </div>
     </template>
 
-    <script src="../../bower_components/moment/moment.js"></script>
     <script>
         Polymer({
             is: "ge-scholars",
@@ -160,44 +159,7 @@
                 this.push('scholars', scholar2);
                 this.push('scholars', scholar);
                 this.push('scholars', scholar);
-
-                this.scholars.forEach(function(item) {
-                    if (!validatorModule.isNullOrEmpty(item.education)) {
-                        item.education = item.education.sort(this.descDateComparer);
-                    }
-
-                    if (!validatorModule.isNullOrEmpty(item.work)) {
-                        item.work = item.work.sort(this.descDateComparer);
-                    }
-                });
             },
-
-            descDateComparer: function(firstItem, secondItem) {
-                if (validatorModule.isNull(firstItem.endDate)) {
-                    if (validatorModule.isNull(secondItem.endDate)) {
-                        var firstDate = moment(firstItem.startDate, "MMMM YYYY");
-                        var secondDate = moment(secondItem.startDate, "MMMM YYYY");
-
-                        return firstDate.diff(secondDate, "months");
-                    }
-
-                    return 1;
-                } else if (validatorModule.isNull(secondItem.endDate)) {
-                    if (validatorModule.isNull(firstItem.endDate)) {
-                        var firstDate = moment(firstItem.startDate, "MMMM YYYY");
-                        var secondDate = moment(secondItem.startDate, "MMMM YYYY");
-
-                        return firstDate.diff(secondDate, "months");
-                    }
-
-                    return 1;
-                }
-
-                var firstDate = moment(firstItem.endDate, "MMMM YYYY");
-                var secondDate = moment(secondItem.endDate, "MMMM YYYY");
-
-                return firstDate.diff(secondDate, "months");
-            }
         });
     </script>
 </dom-module>
