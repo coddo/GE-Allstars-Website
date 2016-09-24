@@ -75,39 +75,24 @@
                 color: var(--app-color-white);
             }
 
-            #bio-section {
-                background-color: var(--app-color-gray);
-                text-align: center;
-                padding-bottom: 5%;
-            }
-
-            #bio-section > span {
-                float: inherit;
-                white-space: pre-wrap;
-                font-size: 20px;
-                max-width: 90%;
-                margin-top: 5%;
-                margin-left: 5%;
-            }
-
             #personal-section {
-                background-color: var(--app-color-blue);
+                background-color: var(--app-color-gray);
             }
 
             #interests-section {
-                background-color: var(--app-color-gray);
+                background-color: var(--app-color-blue);
             }
 
             #projects-section {
-                background-color: var(--app-color-blue);
-            }
-
-            #education-section {
                 background-color: var(--app-color-gray);
             }
 
-            #work-section {
+            #education-section {
                 background-color: var(--app-color-blue);
+            }
+
+            #work-section {
+                background-color: var(--app-color-gray);
             }
 
         </style>
@@ -119,11 +104,6 @@
             <a class="header-item" id="scholar-email" href="mailto:[[scholar.email]]">[[scholar.email]]</a>
             <p class="header-item">[[scholar.motto]]</p>
         </paper-material>
-        <template is="dom-if" if="[[_shouldDisplayBio(scholar)]]">
-            <paper-material class="body-section story-section" id="bio-section" layout vertical center>
-                <span>[[scholar.bio]]</span>
-            </paper-material>
-        </template>
         <template is="dom-if" if="[[_shouldDisplayPersonal(scholar)]]">
             <paper-material class="body-section story-section" id="personal-section" layout vertical left>
                 <h1>Personal information</h1>
@@ -160,10 +140,6 @@
 
             _genericPersonImage: function (sex) {
                 return userModule.getGenericProfilePicture(sex);
-            },
-
-            _shouldDisplayBio(scholar) {
-                return !validatorModule.isNullOrEmpty(scholar.bio);
             },
 
             _shouldDisplayPersonal(scholar) {
