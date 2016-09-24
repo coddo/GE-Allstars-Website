@@ -143,9 +143,12 @@
             properties: {
                 scholar: {
                     type: Object,
-                    value: this._defaultScholarValue,
+                    observer: '_initializeScholar',
                 },
-                elevation: Number,
+                elevation: {
+                    type: Number,
+                    value: 0,
+                },
             },
 
             _genericPersonImage: function (sex) {
@@ -172,72 +175,11 @@
                 return true;
             },
 
-            ready: function () {
+            _initializeScholar: function() {
                 if (validatorModule.isNull(this.scholar)) {
                     return;
                 }
 
-                this.initializeScholar();
-            },
-
-            _defaultScholarValue: function() {
-                return {
-                    profilePicture: "https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-387179.jpg",
-                    email: "scholar@geallstars.com",
-                    username: "CoddoTheGEScholar",
-                    lastName: "GE Scholar",
-                    firstName: "Coddo The",
-                    birthday: "12 December 1993",
-                    sex: "M",
-                    bornIn: "Deva, Romania",
-                    livesIn: "Timisoara, Romania",
-                    scholarSince: "2015",
-                    phone: "05616018919681",
-                    motto: "Truth defies reality",
-                    education: [
-                        {
-                            school: "General Highschool of Justice",
-                            type: "Highschool",
-                            major: "Informatics and mathematics",
-                            location: "Deva, Romania",
-                            startDate: "September 2009",
-                            endDate: "October 2013"
-                        }, {
-                            school: "GE Scholars University",
-                            type: "Undergrad studies",
-                            major: "Computer Science",
-                            location: "Timisoara, Romania",
-                            startDate: "September 2013"
-                        }
-                    ],
-                    work: [
-                        {
-                            company: "Facebook",
-                            position: "Software Engineer",
-                            industry: "IT",
-                            location: "Deva, Romania",
-                            startDate: "September 2009",
-                            endDate: "October 2013"
-                        }, {
-                            company: "Microsoft",
-                            position: "Full Stack Developer",
-                            industry: "IT",
-                            location: "Deva, Romania",
-                            startDate: "September 2009",
-                            endDate: "October 2013"
-                        }
-                    ],
-                    interests: [
-                        "Photography", "Computer science", "Skying", "Travelling"
-                    ],
-                    facebook: "https://www.facebook.com/claudiu.codoban.7",
-                    linkedIn: "LinkedIn link here",
-                    twitter: "Twitter link here",
-                    googlePlus: "Google+ link here"
-                };
-            },
-
-            initializeScholar: function() {
                 this.set('scholar.age', this.computeAge());
                 this.set('scholar.fullName', this.scholar.firstName + " " + this.scholar.lastName);
 

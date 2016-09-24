@@ -17,13 +17,6 @@
             height: 100%;
         }
 
-        #img-span {
-            position: relative;
-            top: 50%;
-            color: white;
-            display: inline-block;
-        }
-
     </style>
     <template>
         <template is="dom-if" if="[[shouldDisplayPrimaryPic]]">
@@ -31,9 +24,6 @@
         </template>
         <template id="img" is="dom-if" if="[[shouldDisplaySecondaryPic]]">
             <img src="[[altSrc]]">
-        </template>
-        <template is="dom-if" if="[[shouldDisplayText]]">
-            <span id="img-span">[[text]]</span>
         </template>
     </template>
 
@@ -44,45 +34,24 @@
             properties: {
                 src: {
                     type: String,
-                    notify: true,
                     observer: "_updateDisplay"
                 },
                 altSrc: {
                     type: String,
-                    notify: true,
                     observer: "_updateDisplay"
                 },
-                altText: {
-                    type: String,
-                    notify: true,
-                    observer: "_updateDisplay"
-                }
             },
 
             ready: function () {
-                if (!validatorModule.isNullOrEmpty(this.altText)) {
-                    this.set('text', this.altText);
-                    return;
-                }
-
-                this.set('text', "No image set");
-
                 this.set('shouldDisplayPrimaryPic', false);
                 this.set('shouldDisplaySecondaryPic', false);
-                this.set('shouldDisplayText', true);
             },
 
             _updateDisplay: function () {
                 var hasSrc = !validatorModule.isNullOrEmpty(this.src);
-                var hasAltSrc = !validatorModule.isNullOrEmpty(this.altSrc);
 
-                var showSrc = hasSrc;
-                var showAltSrc = !hasSrc && hasAltSrc;
-                var showText = !hasSrc && !hasAltSrc;
-
-                this.set('shouldDisplayPrimaryPic', showSrc);
-                this.set('shouldDisplaySecondaryPic', showAltSrc);
-                this.set('shouldDisplayText', showText);
+                this.set('shouldDisplayPrimaryPic', hasSrc);
+                this.set('shouldDisplaySecondaryPic', !hasSrc);
             }
         });
     </script>
