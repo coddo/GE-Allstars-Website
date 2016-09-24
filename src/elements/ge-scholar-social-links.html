@@ -10,7 +10,7 @@
             paper-tooltip.big {
                 --paper-tooltip: {
                     font-size: 14px;
-                    background: var(--app-color-blue);
+                    background: var(--app-color-accent-pink);
                     z-index: 1;
                 }
             }
@@ -73,6 +73,7 @@
             },
 
             _isSocialLinkSet: function (link) {
+                return true; //TODO: Remove this when in production
                 return validatorModule.isUrlValid(link);
             }
         });

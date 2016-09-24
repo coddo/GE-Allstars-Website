@@ -17,7 +17,7 @@
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment">
             :host {
-                --color-info-interests: #E91E63;
+                --color-info-interests: var(--app-color-accent-pink);
                 --color-info-education: #2196F3;
                 --color-info-work: #2979FF;
             }
@@ -25,7 +25,7 @@
             paper-tooltip.big {
                 --paper-tooltip: {
                     font-size: 14px;
-                    background: var(--app-color-blue);
+                    background: var(--app-color-accent-pink);
                     z-index: 1;
                 }
             }
@@ -121,10 +121,11 @@
 
             #viewProfileDialog #dialog-close-but {
                 position: relative;
-                right: 15px;
+                right: 1%;
                 color: black;
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 22px;
+                color: var(--app-color-accent-pink);
             }
 
             #viewProfileDialog paper-dialog-scrollable {
