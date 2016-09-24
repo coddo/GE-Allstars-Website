@@ -9,8 +9,6 @@
             #cards {
                 width: 100%;
                 height: 100%;
-                align-content: center;
-                align-items: center;
                 text-align: center;
                 padding-top: 50px;
             }
@@ -26,10 +24,6 @@
     <script>
         Polymer({
             is: "ge-scholars",
-
-            hello: function(item) {
-                print(item);
-            },
 
             ready: function() {
                 if (!validatorModule.isNullOrEmpty(this.scholars)) {
