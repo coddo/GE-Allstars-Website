@@ -75,8 +75,8 @@
 
             #profile-header #social-links {
                 position: absolute;
-                left: 10px;
-                top: 10px;
+                left: 1%;
+                top: 5%;
             }
 
             #profile-header #profile-picture {
@@ -143,12 +143,12 @@
             properties: {
                 scholar: {
                     type: Object,
-                    observer: '_initializeScholar',
+                    observer: '_initializeScholar'
                 },
                 elevation: {
                     type: Number,
-                    value: 0,
-                },
+                    value: 0
+                }
             },
 
             _genericPersonImage: function (sex) {
@@ -175,7 +175,7 @@
                 return true;
             },
 
-            _initializeScholar: function() {
+            _initializeScholar: function () {
                 if (validatorModule.isNull(this.scholar)) {
                     return;
                 }
@@ -224,7 +224,7 @@
                 var secondDate = moment(secondItem.endDate, "MMMM YYYY");
 
                 return firstDate.diff(secondDate, "months");
-            },
+            }
         });
     </script>
 </dom-module>
