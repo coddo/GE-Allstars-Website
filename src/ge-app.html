@@ -18,6 +18,7 @@
                 --app-color-white: #fff;
                 --app-color-black: #000000;
                 --app-color-gray: #617E8C;
+                --app-color-accent-pink: #E91E63;
             }
 
             paper-scroll-header-panel {
@@ -39,6 +40,7 @@
             }
 
             footer {
+                display: inline-block;
                 width: 100%;
                 height: 10%;
                 background-color: var(--app-color-gray);
@@ -76,13 +78,14 @@
 
                 <body class="layout fullbleed vertical">
                     <paper-scroll-header-panel condenses class="flex">
-                        <ge-navbar page="[[page]]"></ge-navbar>
+                        <ge-navbar></ge-navbar>
 
                         <div class="main-content">
                             <div class="body-content">
                                 <iron-pages id="router" selected="[[page]]" attr-for-selected="name">
                                     <ge-landing-page name="landing-page"></ge-landing-page>
                                     <ge-scholars name="scholars"></ge-scholars>
+                                    <ge-profile-page name="profile" route="{{subroute}}"></ge-profile-page>
                                 </iron-pages>
                             </div>
 
@@ -118,6 +121,12 @@
                 '_routePageChanged(routeData.page)'
             ],
 
+            routesMap: {
+                ["landing-page"]: "ge-landing-page",
+                ["scholars"]: "ge-scholars",
+                ["profile"]: "ge-profile-page",
+            },
+
             _routePageChanged: function(page) {
                 this.page = page || "landing-page";
                 this.mainPage = "main";
@@ -125,7 +134,7 @@
 
             // load page import on demand.
             _pageChanged: function(page) {
-                this.importHref(this.resolveUrl('ge-' + page + '.html'), null, function(e) {
+                this.importHref(this.resolveUrl(this.routesMap[page] + ".html"), null, function(e) {
                     this.mainPage = "not-found";
                 }, true);
             },
